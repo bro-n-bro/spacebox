@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   writer:
-    image: malekvictor/space-box-writer:0.0.2
+    image: malekvictor/space-box-writer:0.0.3
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
@@ -58,12 +58,14 @@ services:
       - '8123:8123'
       - '9000:9000'
       - '9009:9009'
+    environment:
+      CLICKHOUSE_DB: spacebox
     volumes:
       - ./volumes/clickhouse/data:/var/lib/clickhouse
       - ./volumes/clickhouse/logs:/var/log/clickhouse-server
       - ./config/clickhouse:/etc/clickhouse-server/users.d
   crawler:
-    image: malekvictor/space-box-crawler:0.0.3
+    image: malekvictor/space-box-crawler:0.0.7
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
