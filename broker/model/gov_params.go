@@ -26,3 +26,31 @@ type (
 		Height        int64         `json:"height"`
 	}
 )
+
+func NewDepositParams(maxDepositPeriod int64, coins Coins) DepositParams {
+	return DepositParams{
+		MinDeposit:       coins,
+		MaxDepositPeriod: maxDepositPeriod,
+	}
+}
+
+func NewVotingParams(votingPeriod int64) VotingParams {
+	return VotingParams{VotingPeriod: votingPeriod}
+}
+
+func NewTallyParams(quorum, threshold, vetoThreshold float64) TallyParams {
+	return TallyParams{
+		Quorum:        quorum,
+		Threshold:     threshold,
+		VetoThreshold: vetoThreshold,
+	}
+}
+
+func NewGowParams(height int64, depositParams DepositParams, votingParams VotingParams, tallyParams TallyParams) GovParams {
+	return GovParams{
+		DepositParams: depositParams,
+		VotingParams:  votingParams,
+		TallyParams:   tallyParams,
+		Height:        height,
+	}
+}
