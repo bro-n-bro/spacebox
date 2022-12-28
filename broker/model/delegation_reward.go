@@ -7,3 +7,15 @@ type DelegationReward struct {
 	WithdrawAddress  string `json:"withdraw_address"`
 	Coins            Coins  `json:"coins"`
 }
+
+func NewDelegationReward(height int64, operatorAddress, delegatorAddress, withdrawAddress string,
+	coins Coins) DelegationReward {
+
+	return DelegationReward{
+		Height:           height,
+		OperatorAddress:  operatorAddress,
+		DelegatorAddress: delegatorAddress,
+		WithdrawAddress:  withdrawAddress,
+		Coins:            coins,
+	}
+}
