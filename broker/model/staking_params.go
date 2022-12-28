@@ -3,7 +3,7 @@ package model
 import "time"
 
 type (
-	SParams struct {
+	sParams struct {
 		UnbondingTime time.Duration `json:"unbonding_time"`
 		// max_validators is the maximum number of validators.
 		MaxValidators uint32 `json:"max_validators"`
@@ -17,7 +17,23 @@ type (
 		MinCommissionRate float64 `json:"min_commission_rate"`
 	}
 	StakingParams struct {
-		Params SParams `json:"params"`
+		Params sParams `json:"params"`
 		Height int64   `json:"height"`
 	}
 )
+
+func NewStakingParams(height int64, maxValidators, maxEntries, HistoricalEntries uint32, bondDenom string,
+	minCommissionRate float64, unbondingTime time.Duration) StakingParams {
+
+	return StakingParams{
+		Params: sParams{
+			UnbondingTime:     unbondingTime,
+			MaxValidators:     maxValidators,
+			MaxEntries:        maxEntries,
+			HistoricalEntries: HistoricalEntries,
+			BondDenom:         bondDenom,
+			MinCommissionRate: minCommissionRate,
+		},
+		Height: height,
+	}
+}
