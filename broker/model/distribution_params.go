@@ -15,6 +15,7 @@ type (
 
 func NewDistributionParams(height int64, communityTax, baseProposeReward, bonusProposerReward float64,
 	withdrawAddrEnabled bool) DistributionParams {
+
 	return DistributionParams{
 		Height: height,
 		Params: dParams{
