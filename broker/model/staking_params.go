@@ -22,7 +22,7 @@ type (
 	}
 )
 
-func NewStakingParams(height int64, maxValidators, maxEntries, HistoricalEntries uint32, bondDenom string,
+func NewStakingParams(height int64, maxValidators, maxEntries, historicalEntries uint32, bondDenom string,
 	minCommissionRate float64, unbondingTime time.Duration) StakingParams {
 
 	return StakingParams{
@@ -30,7 +30,7 @@ func NewStakingParams(height int64, maxValidators, maxEntries, HistoricalEntries
 			UnbondingTime:     unbondingTime,
 			MaxValidators:     maxValidators,
 			MaxEntries:        maxEntries,
-			HistoricalEntries: HistoricalEntries,
+			HistoricalEntries: historicalEntries,
 			BondDenom:         bondDenom,
 			MinCommissionRate: minCommissionRate,
 		},

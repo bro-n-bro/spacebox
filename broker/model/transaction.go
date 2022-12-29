@@ -38,7 +38,7 @@ type (
 		Hash        string        `json:"hash"`
 		Height      int64         `json:"height"`
 		Success     bool          `json:"success"`
-		Messages    []byte        `json:"messages"`
+		Messages    [][]byte      `json:"messages"`
 		Memo        string        `json:"memo"`
 		Signatures  []string      `json:"signatures"`
 		Signer      string        `json:"signer"`
