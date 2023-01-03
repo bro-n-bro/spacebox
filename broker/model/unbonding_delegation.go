@@ -28,3 +28,17 @@ func NewUnbondingDelegation(height int64, delegatorAddress, validatorAddress str
 		Height:              height,
 	}
 }
+
+func NewUnbondingDelegationMessage(height int64, delegatorAddress, validatorAddress, txHash string, coin Coin,
+	completionTimestamp time.Time) UnbondingDelegationMessage {
+	return UnbondingDelegationMessage{
+		UnbondingDelegation: UnbondingDelegation{
+			CompletionTimestamp: completionTimestamp,
+			Coin:                coin,
+			DelegatorAddress:    delegatorAddress,
+			ValidatorAddress:    validatorAddress,
+			Height:              height,
+		},
+		TxHash: txHash,
+	}
+}
