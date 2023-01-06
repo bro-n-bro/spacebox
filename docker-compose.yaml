@@ -149,6 +149,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: spacebox_password
       MONGO_INITDB_DATABASE: spacebox
     ports:
-      - '27018:27017'
+      - '27019:27017'
     volumes:
       - ./volumes/mongo/writer:/data/db
