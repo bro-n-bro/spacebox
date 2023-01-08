@@ -1,7 +1,7 @@
 package model
 
 type (
-	dParams struct {
+	DParams struct {
 		CommunityTax        float64 `json:"community_tax"`
 		BaseProposerReward  float64 `json:"base_proposer_reward"`
 		BonusProposerReward float64 `json:"bonus_proposer_reward"`
@@ -9,6 +9,6 @@ type (
 	}
 	DistributionParams struct {
 		Height int64   `json:"height"`
-		Params dParams `json:"params"`
+		Params DParams `json:"params"`
 	}
 )

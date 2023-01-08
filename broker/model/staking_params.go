@@ -3,7 +3,7 @@ package model
 import "time"
 
 type (
-	sParams struct {
+	SParams struct {
 		UnbondingTime     time.Duration `json:"unbonding_time"`
 		MaxValidators     uint32        `json:"max_validators"`
 		MaxEntries        uint32        `json:"max_entries"`
@@ -12,7 +12,7 @@ type (
 		MinCommissionRate float64       `json:"min_commission_rate"`
 	}
 	StakingParams struct {
-		Params sParams `json:"params"`
+		Params SParams `json:"params"`
 		Height int64   `json:"height"`
 	}
 )
