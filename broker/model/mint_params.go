@@ -14,19 +14,3 @@ type (
 		Params mParams `json:"params"`
 	}
 )
-
-func NewMintParams(height int64, mintDenom string, inflationRateChange, inflationMax, inflationMin, goalBonded float64,
-	blocksPerYear uint64) MintParams {
-
-	return MintParams{
-		Height: height,
-		Params: mParams{
-			MintDenom:           mintDenom,
-			InflationRateChange: inflationRateChange,
-			InflationMax:        inflationMax,
-			InflationMin:        inflationMin,
-			GoalBonded:          goalBonded,
-			BlocksPerYear:       blocksPerYear,
-		},
-	}
-}

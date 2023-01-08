@@ -12,17 +12,3 @@ type (
 		Params dParams `json:"params"`
 	}
 )
-
-func NewDistributionParams(height int64, communityTax, baseProposeReward, bonusProposerReward float64,
-	withdrawAddrEnabled bool) DistributionParams {
-
-	return DistributionParams{
-		Height: height,
-		Params: dParams{
-			CommunityTax:        communityTax,
-			BaseProposerReward:  baseProposeReward,
-			BonusProposerReward: bonusProposerReward,
-			WithdrawAddrEnabled: withdrawAddrEnabled,
-		},
-	}
-}

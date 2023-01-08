@@ -7,13 +7,3 @@ type MultiSendMessage struct {
 	TxHash      string `json:"tx_hash"`
 	Height      int64  `json:"height"`
 }
-
-func NewMultiSendMessage(height int64, addressFrom, addressTo, txHash string, coins Coins) MultiSendMessage {
-	return MultiSendMessage{
-		Coins:       coins,
-		AddressFrom: addressFrom,
-		AddressTo:   addressTo,
-		TxHash:      txHash,
-		Height:      height,
-	}
-}

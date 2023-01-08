@@ -16,29 +16,3 @@ type (
 		TxHash string `json:"tx_hash"`
 	}
 )
-
-func NewUnbondingDelegation(height int64, delegatorAddress, validatorAddress string, coin Coin,
-	completionTimestamp time.Time) UnbondingDelegation {
-
-	return UnbondingDelegation{
-		CompletionTimestamp: completionTimestamp,
-		Coin:                coin,
-		DelegatorAddress:    delegatorAddress,
-		ValidatorAddress:    validatorAddress,
-		Height:              height,
-	}
-}
-
-func NewUnbondingDelegationMessage(height int64, delegatorAddress, validatorAddress, txHash string, coin Coin,
-	completionTimestamp time.Time) UnbondingDelegationMessage {
-	return UnbondingDelegationMessage{
-		UnbondingDelegation: UnbondingDelegation{
-			CompletionTimestamp: completionTimestamp,
-			Coin:                coin,
-			DelegatorAddress:    delegatorAddress,
-			ValidatorAddress:    validatorAddress,
-			Height:              height,
-		},
-		TxHash: txHash,
-	}
-}
