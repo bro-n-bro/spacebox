@@ -1,4 +1,5 @@
 package model
 
-type Proposal struct {
-}
+type Proposal struct{}
+
+func NewProposal() Proposal { return Proposal{} }
