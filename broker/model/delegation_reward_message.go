@@ -6,9 +6,10 @@ type DelegationRewardMessage struct {
 	DelegatorAddress string `json:"delegator_address"`
 	ValidatorAddress string `json:"validator_address"`
 	TxHash           string `json:"tx_hash"`
+	MsgIndex         int64  `json:"msg_index"`
 }
 
-func NewDelegationRewardMessage(height int64, delegatorAddress, validatorAddress, txHash string,
+func NewDelegationRewardMessage(height, msgIndex int64, delegatorAddress, validatorAddress, txHash string,
 	coins Coins) DelegationRewardMessage {
 
 	return DelegationRewardMessage{
@@ -17,5 +18,6 @@ func NewDelegationRewardMessage(height int64, delegatorAddress, validatorAddress
 		DelegatorAddress: delegatorAddress,
 		ValidatorAddress: validatorAddress,
 		TxHash:           txHash,
+		MsgIndex:         msgIndex,
 	}
 }

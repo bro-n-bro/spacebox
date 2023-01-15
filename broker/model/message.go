@@ -2,16 +2,27 @@ package model
 
 type Message struct {
 	TransactionHash           string   `json:"transaction_hash"`
-	Index                     int      `json:"index"`
 	Type                      string   `json:"type"`
-	Value                     []byte   `json:"value"`
-	InvolvedAccountsAddresses []string `json:"involved_accounts_addresses"`
 	Signer                    string   `json:"signer"`
-	//transaction_hash            TEXT   NOT NULL REFERENCES transaction (hash),
-	//index                       BIGINT NOT NULL,
-	//type                        TEXT   NOT NULL,
-	//value                       JSONB  NOT NULL,
-	//involved_accounts_addresses TEXT[] NULL
-	//signer                      TEXT   NOT NULL DEFAULT '{}'::JSONB REFERENCES accounts(address)
+	InvolvedAccountsAddresses []string `json:"involved_accounts_addresses"`
+	Value                     []byte   `json:"value"`
+	MsgIndex                  int64    `json:"msg_index"`
+	Index                     int64    `json:"index"`
+}
 
+func NewMessage(
+	transactionHash, msgType, signer string,
+	index, msgIndex int64,
+	value []byte,
+	involvedAccountsAddresses []string,
+) Message {
+	return Message{
+		TransactionHash:           transactionHash,
+		Index:                     index,
+		Type:                      msgType,
+		Value:                     value,
+		InvolvedAccountsAddresses: involvedAccountsAddresses,
+		Signer:                    signer,
+		MsgIndex:                  msgIndex,
+	}
 }

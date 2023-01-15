@@ -15,8 +15,12 @@ type (
 	}
 )
 
-func NewMintParams(height int64, mintDenom string, inflationRateChange, inflationMax, inflationMin, goalBonded float64,
-	blocksPerYear uint64) MintParams {
+func NewMintParams(
+	mintDenom string,
+	inflationRateChange, inflationMax, inflationMin, goalBonded float64,
+	blocksPerYear uint64,
+	height int64,
+) MintParams {
 
 	return MintParams{
 		Height: height,
