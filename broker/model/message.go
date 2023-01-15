@@ -6,5 +6,5 @@ type Message struct {
 	Signer                    string   `json:"signer"`
 	InvolvedAccountsAddresses []string `json:"involved_accounts_addresses"`
 	Value                     []byte   `json:"value"`
-	Index                     int64    `json:"index"`
+	MsgIndex                  int64    `json:"msg_index"`
 }
