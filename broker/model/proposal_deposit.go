@@ -9,6 +9,7 @@ type (
 	}
 	ProposalDepositMessage struct {
 		ProposalDeposit
-		TxHash string `json:"tx_hash"`
+		TxHash   string `json:"tx_hash"`
+		MsgIndex int64  `json:"msg_index"`
 	}
 )
