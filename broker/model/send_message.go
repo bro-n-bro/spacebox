@@ -8,14 +8,3 @@ type SendMessage struct {
 	Height      int64  `json:"height"`
 	MsgIndex    int64  `json:"msg_index"`
 }
-
-func NewSendMessage(height, msgIndex int64, addressFrom, addressTo, txHash string, coins Coins) SendMessage {
-	return SendMessage{
-		Coins:       coins,
-		AddressFrom: addressFrom,
-		AddressTo:   addressTo,
-		TxHash:      txHash,
-		Height:      height,
-		MsgIndex:    msgIndex,
-	}
-}

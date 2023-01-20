@@ -1,0 +1,146 @@
+version: "3.9"
+
+services:
+  crawler:
+    image: hexydev/spacebox-crawler:0.0.2
+    environment:
+      ENV_FILE: "/opt/.env"
+    restart: unless-stopped
+    volumes:
+      - .env:/opt/.env
+    ports:
+      - '2112:2112'
+    depends_on:
+      kafka:
+        condition: service_healthy
+      zookeeper:
+        condition: service_started
+      mongo-crawler:
+        condition: service_started
+  writer:
+    image: hexydev/spacebox-writer:0.0.1
+    environment:
+      ENV_FILE: "/opt/.env"
+    restart: unless-stopped
+    volumes:
+      - .env:/opt/.env
+    ports:
+      - '2113-2130:2112'
+    depends_on:
+      zookeeper:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+      mongo-writer:
+        condition: service_started
+  kafka-ui:
+    container_name: spacebox-kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_started
+      zookeeper:
+        condition: service_started
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9093
+  zookeeper:
+    image: bitnami/zookeeper:3.8.0
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    restart: unless-stopped
+    container_name: spacebox-zookeeper
+    volumes:
+      - ./volumes/zookeeper:/bitnami/zookeeper
+  kafka:
+    image: bitnami/kafka:3.3.1
+    ports:
+      - '9092:9092'
+      - '9093:9093'
+    hostname: kafka
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9093,EXTERNAL://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9093,EXTERNAL://localhost:9092
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+      - KAFKA_CFG_DELETE_TOPIC_ENABLE=true
+    volumes:
+      - ./volumes/kafka:/bitnami/kafka
+    restart: unless-stopped
+    depends_on:
+      zookeeper:
+        condition: service_started
+    healthcheck:
+      test: kafka-topics.sh --list --bootstrap-server localhost:9092
+      interval: 120s
+      timeout: 60s
+      retries: 5
+  #  kafka-init-topics:
+  #    image: bitnami/kafka:3.3.1
+  #    container_name: kafka-init-topics
+  #    volumes:
+  #      - ./scripts/create_topics.sh:/opt/kafka/init_topics.sh
+  #    depends_on:
+  #      kafka:
+  #        condition: service_healthy
+  #    command: "bash -c 'echo Create topics... && \
+  #                 ./opt/kafka/init_topics.sh && \
+  #                 echo done!'"
+  clickhouse:
+    image: clickhouse/clickhouse-server:22.9.7
+    restart: unless-stopped
+    hostname: clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+      - '9009:9009'
+    environment:
+      CLICKHOUSE_INIT_TIMEOUT: 60
+      CLICKHOUSE_DB: spacebox
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping
+      interval: 60s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./volumes/clickhouse/data:/var/lib/clickhouse
+      - ./volumes/clickhouse/logs:/var/log/clickhouse-server
+      - ./config/clickhouse/users.d/:/etc/clickhouse-server/users.d/
+      - ./config/clickhouse/config.d/:/etc/clickhouse-server/config.d/
+  mongo-crawler:
+    image: mongo:6.0.3
+    restart: always
+    hostname: mongo-1
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: spacebox_user
+      MONGO_INITDB_ROOT_PASSWORD: spacebox_password
+      MONGO_INITDB_DATABASE: spacebox
+    ports:
+      - '27018:27017'
+    volumes:
+      - ./volumes/mongo/crawler:/data/db
+  mongo-writer:
+    image: mongo:6.0.3
+    restart: always
+    hostname: mongo-2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: spacebox_user
+      MONGO_INITDB_ROOT_PASSWORD: spacebox_password
+      MONGO_INITDB_DATABASE: spacebox
+    ports:
+      - '27019:27017'
+    volumes:
+      - ./volumes/mongo/writer:/data/db

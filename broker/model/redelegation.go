@@ -13,34 +13,7 @@ type (
 	}
 	RedelegationMessage struct {
 		Redelegation
-		TxHash string `json:"tx_hash"`
+		TxHash   string `json:"tx_hash"`
+		MsgIndex int64  `json:"msg_index"`
 	}
 )
-
-func NewRedelegation(height int64, delegatorAddress, srcValidatorAddress, dstValidatorAddress string, coin Coin,
-	completionTime time.Time) Redelegation {
-
-	return Redelegation{
-		CompletionTime:      completionTime,
-		Coin:                coin,
-		DelegatorAddress:    delegatorAddress,
-		SrcValidatorAddress: srcValidatorAddress,
-		DstValidatorAddress: dstValidatorAddress,
-		Height:              height,
-	}
-}
-
-func NewRedelegationMessage(height int64, delegatorAddress, srcValidatorAddress, dstValidatorAddress, txHash string,
-	coin Coin, completionTime time.Time) RedelegationMessage {
-	return RedelegationMessage{
-		Redelegation: Redelegation{
-			CompletionTime:      completionTime,
-			Coin:                coin,
-			DelegatorAddress:    delegatorAddress,
-			SrcValidatorAddress: srcValidatorAddress,
-			DstValidatorAddress: dstValidatorAddress,
-			Height:              height,
-		},
-		TxHash: txHash,
-	}
-}

@@ -9,27 +9,7 @@ type (
 	}
 	DelegationMessage struct {
 		Delegation
-		TxHash string `json:"tx_hash"`
+		TxHash   string `json:"tx_hash"`
+		MsgIndex int64  `json:"msg_index"`
 	}
 )
-
-func NewDelegation(operatorAddress, delegatorAddress string, height int64, coin Coin) Delegation {
-	return Delegation{
-		OperatorAddress:  operatorAddress,
-		DelegatorAddress: delegatorAddress,
-		Coin:             coin,
-		Height:           height,
-	}
-}
-
-func NewDelegationMessage(operatorAddress, delegatorAddress, txHash string, height int64, coin Coin) DelegationMessage {
-	return DelegationMessage{
-		Delegation: Delegation{
-			OperatorAddress:  operatorAddress,
-			DelegatorAddress: delegatorAddress,
-			Coin:             coin,
-			Height:           height,
-		},
-		TxHash: txHash,
-	}
-}

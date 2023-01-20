@@ -1,7 +1,7 @@
 package model
 
 type (
-	mParams struct {
+	MParams struct {
 		MintDenom           string  `json:"mint_denom"`
 		InflationRateChange float64 `json:"inflation_rate_change"`
 		InflationMax        float64 `json:"inflation_max"`
@@ -11,26 +11,6 @@ type (
 	}
 	MintParams struct {
 		Height int64   `json:"height"`
-		Params mParams `json:"params"`
+		Params MParams `json:"params"`
 	}
 )
-
-func NewMintParams(
-	mintDenom string,
-	inflationRateChange, inflationMax, inflationMin, goalBonded float64,
-	blocksPerYear uint64,
-	height int64,
-) MintParams {
-
-	return MintParams{
-		Height: height,
-		Params: mParams{
-			MintDenom:           mintDenom,
-			InflationRateChange: inflationRateChange,
-			InflationMax:        inflationMax,
-			InflationMin:        inflationMin,
-			GoalBonded:          goalBonded,
-			BlocksPerYear:       blocksPerYear,
-		},
-	}
-}

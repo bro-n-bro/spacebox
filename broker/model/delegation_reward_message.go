@@ -8,16 +8,3 @@ type DelegationRewardMessage struct {
 	TxHash           string `json:"tx_hash"`
 	MsgIndex         int64  `json:"msg_index"`
 }
-
-func NewDelegationRewardMessage(height, msgIndex int64, delegatorAddress, validatorAddress, txHash string,
-	coins Coins) DelegationRewardMessage {
-
-	return DelegationRewardMessage{
-		Coins:            coins,
-		Height:           height,
-		DelegatorAddress: delegatorAddress,
-		ValidatorAddress: validatorAddress,
-		TxHash:           txHash,
-		MsgIndex:         msgIndex,
-	}
-}
