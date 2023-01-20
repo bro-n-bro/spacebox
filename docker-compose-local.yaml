@@ -2,12 +2,12 @@ version: "3.9"
 
 services:
   crawler:
-    image: hexydev/spacebox-crawler:0.0.2
+    image: hexydev/spacebox-crawler:0.0.3
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
     volumes:
-      - .env:/opt/.env
+      - .env.local:/opt/.env
     ports:
       - '2112:2112'
     depends_on:
@@ -18,12 +18,12 @@ services:
       mongo-crawler:
         condition: service_started
   writer:
-    image: hexydev/spacebox-writer:0.0.1
+    image: hexydev/spacebox-writer:0.0.2
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
     volumes:
-      - .env:/opt/.env
+      - .env.local:/opt/.env
     ports:
       - '2113-2130:2112'
     depends_on:
@@ -107,6 +107,7 @@ services:
       - '8123:8123'
       - '9000:9000'
       - '9009:9009'
+      - '8001:8001'
     environment:
       CLICKHOUSE_INIT_TIMEOUT: 60
       CLICKHOUSE_DB: spacebox
