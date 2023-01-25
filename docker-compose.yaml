@@ -107,6 +107,7 @@ services:
       - '8123:8123'
       - '9000:9000'
       - '9009:9009'
+      - '8001:8001'
     environment:
       CLICKHOUSE_INIT_TIMEOUT: 60
       CLICKHOUSE_DB: spacebox
