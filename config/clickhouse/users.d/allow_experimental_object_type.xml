@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<yandex>
-    <profiles>
+<clickhouse>
+<profiles>
         <default>
             <allow_experimental_object_type>1</allow_experimental_object_type>
         </default>
     </profiles>
-</yandex>
+</clickhouse>

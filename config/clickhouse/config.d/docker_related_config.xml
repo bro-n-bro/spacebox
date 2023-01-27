@@ -18,4 +18,6 @@
         <events>true</events>
         <asynchronous_metrics>true</asynchronous_metrics>
     </prometheus>
+
+    <max_concurrent_queries>500</max_concurrent_queries>
 </clickhouse>
