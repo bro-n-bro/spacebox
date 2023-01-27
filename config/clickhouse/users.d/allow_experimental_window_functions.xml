@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<yandex>
+<clickhouse>
     <profiles>
         <default>
             <allow_experimental_window_functions>1</allow_experimental_window_functions>
         </default>
     </profiles>
-</yandex>
+</clickhouse>
