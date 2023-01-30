@@ -1,40 +1,40 @@
 version: "3.9"
 
 services:
-#  crawler:
-#    image: hexydev/spacebox-crawler:0.0.6
-#    environment:
-#      ENV_FILE: "/opt/.env"
-#    restart: unless-stopped
-#    volumes:
-#      - .env.local:/opt/.env
-#    ports:
-#      - '2112:2112'
-#    depends_on:
-#      kafka:
-#        condition: service_healthy
-#      zookeeper:
-#        condition: service_started
-#      mongo-crawler:
-#        condition: service_started
-#  writer:
-#    image: hexydev/spacebox-writer:0.0.4
-#    environment:
-#      ENV_FILE: "/opt/.env"
-#    restart: unless-stopped
-#    volumes:
-#      - .env.local:/opt/.env
-#    ports:
-#      - '2113-2130:2112'
-#    depends_on:
-#      zookeeper:
-#        condition: service_started
-#      kafka:
-#        condition: service_healthy
-#      clickhouse:
-#        condition: service_healthy
-#      mongo-writer:
-#        condition: service_started
+  crawler:
+    image: hexydev/spacebox-crawler:0.0.6
+    environment:
+      ENV_FILE: "/opt/.env"
+    restart: unless-stopped
+    volumes:
+      - .env.local:/opt/.env
+    ports:
+      - '2112:2112'
+    depends_on:
+      kafka:
+        condition: service_healthy
+      zookeeper:
+        condition: service_started
+      mongo-crawler:
+        condition: service_started
+  writer:
+    image: hexydev/spacebox-writer:0.0.4
+    environment:
+      ENV_FILE: "/opt/.env"
+    restart: unless-stopped
+    volumes:
+      - .env.local:/opt/.env
+    ports:
+      - '2113-2130:2112'
+    depends_on:
+      zookeeper:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+      mongo-writer:
+        condition: service_started
   kafka-ui:
     container_name: spacebox-kafka-ui
     image: provectuslabs/kafka-ui:latest
