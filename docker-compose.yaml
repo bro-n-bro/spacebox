@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   crawler:
-    image: hexydev/spacebox-crawler:0.0.5
+    image: hexydev/spacebox-crawler:0.0.6
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
@@ -18,7 +18,7 @@ services:
       mongo-crawler:
         condition: service_started
   writer:
-    image: hexydev/spacebox-writer:0.0.4
+    image: hexydev/spacebox-writer:0.0.5
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
