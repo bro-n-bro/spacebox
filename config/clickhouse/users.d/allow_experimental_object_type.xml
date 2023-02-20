@@ -1,5 +1,5 @@
 <clickhouse>
-<profiles>
+    <profiles>
         <default>
             <allow_experimental_object_type>1</allow_experimental_object_type>
         </default>
