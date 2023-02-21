@@ -1,7 +1,7 @@
 package model
 
 type DelegationRewardMessage struct {
-	Coins            Coins  `json:"coins"`
+	Coin             Coin   `json:"coin"`
 	Height           int64  `json:"height"`
 	DelegatorAddress string `json:"delegator_address"`
 	ValidatorAddress string `json:"validator_address"`
