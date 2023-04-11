@@ -1,7 +1,7 @@
 package model
 
-type DistributionRewards struct {
+type DistributionReward struct {
 	Height    int64  `json:"height"`
 	Validator string `json:"validator"`
-	Rewards   Coin   `json:"rewards"`
+	Amount    Coin   `json:"amount"`
 }
