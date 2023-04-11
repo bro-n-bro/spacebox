@@ -5,5 +5,5 @@ type WithdrawValidatorCommissionMessage struct {
 	TxHash             string `json:"tx_hash"`
 	MsgIndex           int64  `json:"msg_index"`
 	WithdrawCommission int64  `json:"withdraw_commission"`
-	SenderAddress      string `json:"sender_address"`
+	ValidatorAddress   string `json:"validator_address"`
 }
