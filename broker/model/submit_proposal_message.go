@@ -7,7 +7,8 @@ type SubmitProposalMessage struct {
 	Proposer       string `json:"proposer"`
 	Messages       string `json:"messages"`
 	InitialDeposit int64  `json:"initial_deposit"`
-	Metadata       string `json:"metadata"`
 	Title          string `json:"title"`
-	Summary        string `json:"summary"`
+	Description    string `json:"description"`
+	Type           string `json:"type"`
+	ProposalID     uint64 `json:"proposal_id"`
 }
