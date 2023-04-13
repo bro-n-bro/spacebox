@@ -8,3 +8,8 @@ type VoteWeightedMessage struct {
 	Voter              string               `json:"voter"`
 	WeightedVoteOption []WeightedVoteOption `json:"weighted_vote_option"`
 }
+
+type WeightedVoteOption struct {
+	Option int32   `json:"option,omitempty"`
+	Weight float64 `json:"weight"`
+}
