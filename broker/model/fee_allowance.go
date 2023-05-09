@@ -8,5 +8,4 @@ type FeeAllowance struct {
 	Grantee    string    `json:"grantee"`
 	Allowance  []byte    `json:"allowance"`
 	Expiration time.Time `json:"expiration"`
-	IsActive   bool      `json:"is_active"`
 }
