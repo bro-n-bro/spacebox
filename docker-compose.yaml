@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   crawler:
-    image: hexydev/spacebox-crawler:0.0.14
+    image: bronbro/spacebox-crawler:latest
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
@@ -10,6 +10,11 @@ services:
       - .env:/opt/.env
     ports:
       - '2112:2112'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "300m"
+        max-file: "5"
     depends_on:
       kafka:
         condition: service_healthy
@@ -18,14 +23,19 @@ services:
       mongo-crawler:
         condition: service_started
   writer:
-    image: hexydev/spacebox-writer:0.0.8
+    image: bronbro/spacebox-writer:latest
     environment:
       ENV_FILE: "/opt/.env"
     restart: unless-stopped
     volumes:
       - .env:/opt/.env
     ports:
-      - '2113-2130:2112'
+      - '2113:2112'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "300m"
+        max-file: "5"
     depends_on:
       zookeeper:
         condition: service_started

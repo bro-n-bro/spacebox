@@ -13,12 +13,15 @@ The overall architecture provided on the scheme:
 Following [sdk](https://github.com/cosmos/cosmos-sdk/tree/v0.45.13/x) modules supported in current version:
 
 - bank
-- gov
+- core
 - auth
+- authz
+- distribution
+- gov
 - mint
 - staking
-- distribution
-- core
+- slashing
+- feegrant
 
 ### List of services utilized
 
@@ -73,6 +76,22 @@ chown -R 1001:1001 volumes/
 ```
 
 It usually requires around ~2 minutes to start everything. Check the log of each container with `docker logs <container_name>` to see what's going under the hood. Also, it is possible to adjust some parameters on the fly, edit `.env`, and restart the appropriate container.
+
+Also if you're indexing node from the same host machine you may need to add following line to crawlers `docker-compose.yaml` section:
+
+```bash
+    ports:
+      - '2112:2112'
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+```
+
+and set RPC and GRPC addresses in the `.env` accordingly:
+
+```bash
+RPC_URL=http://host.docker.internal:26657
+GRPC_URL=host.docker.internal:9090 
+```
 
 ## Monitoring
 
