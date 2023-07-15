@@ -36,4 +36,10 @@ type (
 		MsgIndex           int64  `json:"msg_index"`
 		TxHash             string `json:"tx_hash"`
 	}
+
+	DenomTrace struct {
+		DenomHash string
+		Path      string
+		BaseDenom string
+	}
 )
