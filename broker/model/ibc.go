@@ -38,8 +38,8 @@ type (
 	}
 
 	DenomTrace struct {
-		DenomHash string
-		Path      string
-		BaseDenom string
+		DenomHash string `json:"denom_hash"`
+		Path      string `json:"path"`
+		BaseDenom string `json:"base_denom"`
 	}
 )
