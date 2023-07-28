@@ -13,7 +13,7 @@ type Swap struct {
 	TransactedCoinAmount      float64 `json:"transacted_coin_amount"`
 	RemainingOfferCoinAmount  float64 `json:"remaining_offer_coin_amount"`
 	OfferCoinFeeAmount        float64 `json:"offer_coin_fee_amount"`
-	OrderExpiryHeight         float64 `json:"order_expiry_height"`
+	OrderExpiryHeight         int64   `json:"order_expiry_height"`
 	ExchangedCoinFeeAmount    float64 `json:"exchanged_coin_fee_amount"`
 	OrderPrice                float64 `json:"order_price"`
 	SwapPrice                 float64 `json:"swap_price"`
