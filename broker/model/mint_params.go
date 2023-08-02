@@ -9,6 +9,7 @@ type (
 		GoalBonded          float64 `json:"goal_bonded"`
 		BlocksPerYear       uint64  `json:"blocks_per_year"`
 	}
+
 	MintParams struct {
 		Height int64   `json:"height"`
 		Params MParams `json:"params"`
