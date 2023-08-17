@@ -17,24 +17,6 @@ services:
         condition: service_started
       mongo-crawler:
         condition: service_started
-  writer:
-    image: hexydev/spacebox-writer:0.0.8
-    environment:
-      ENV_FILE: "/opt/.env"
-    restart: unless-stopped
-    volumes:
-      - .env.local:/opt/.env
-    ports:
-      - '2113-2130:2112'
-    depends_on:
-      zookeeper:
-        condition: service_started
-      kafka:
-        condition: service_healthy
-      clickhouse:
-        condition: service_healthy
-      mongo-writer:
-        condition: service_started
   kafka-ui:
     container_name: spacebox-kafka-ui
     image: provectuslabs/kafka-ui:latest
@@ -84,17 +66,14 @@ services:
       interval: 120s
       timeout: 60s
       retries: 5
-  #  kafka-init-topics:
-  #    image: bitnami/kafka:3.3.1
-  #    container_name: kafka-init-topics
-  #    volumes:
-  #      - ./scripts/create_topics.sh:/opt/kafka/init_topics.sh
-  #    depends_on:
-  #      kafka:
-  #        condition: service_healthy
-  #    command: "bash -c 'echo Create topics... && \
-  #                 ./opt/kafka/init_topics.sh && \
-  #                 echo done!'"
+  migration:
+    image: migrate/migrate:latest
+    command: -path=/migrations/clickhouse -database="clickhouse://clickhouse:9000/spacebox?username=default&x-multi-statement=true" up
+    volumes:
+      - ./migrations:/migrations
+    depends_on:
+      clickhouse:
+        condition: service_healthy
   clickhouse:
     image: clickhouse/clickhouse-server:22.9.7
     restart: unless-stopped
@@ -133,15 +112,3 @@ services:
       - '27018:27017'
     volumes:
       - ./volumes/mongo/crawler:/data/db
-  mongo-writer:
-    image: mongo:6.0.3
-    restart: always
-    hostname: mongo-2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: spacebox_user
-      MONGO_INITDB_ROOT_PASSWORD: spacebox_password
-      MONGO_INITDB_DATABASE: spacebox
-    ports:
-      - '27019:27017'
-    volumes:
-      - ./volumes/mongo/writer:/data/db
