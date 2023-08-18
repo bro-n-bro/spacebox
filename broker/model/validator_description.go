@@ -8,7 +8,6 @@ type (
 		Website         string `json:"website"`
 		SecurityContact string `json:"security_contact"`
 		Details         string `json:"details"`
-		AvatarURL       string `json:"avatar_url"`
 		Height          int64  `json:"height"`
 	}
 )

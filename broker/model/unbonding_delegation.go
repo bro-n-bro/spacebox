@@ -4,11 +4,11 @@ import "time"
 
 type (
 	UnbondingDelegation struct {
-		CompletionTimestamp time.Time `json:"completion_timestamp"`
-		Coin                Coin      `json:"coin"`
-		DelegatorAddress    string    `json:"delegator_address"`
-		ValidatorAddress    string    `json:"validator_address"`
-		Height              int64     `json:"height"`
+		CompletionTime   time.Time `json:"completion_time"`
+		Coin             Coin      `json:"coin"`
+		DelegatorAddress string    `json:"delegator_address"`
+		OperatorAddress  string    `json:"operator_address"`
+		Height           int64     `json:"height"`
 	}
 
 	UnbondingDelegationMessage struct {

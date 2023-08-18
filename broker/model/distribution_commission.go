@@ -1,7 +1,7 @@
 package model
 
 type DistributionCommission struct {
-	Height    int64  `json:"height"`
-	Validator string `json:"validator"`
-	Amount    Coin   `json:"amount"`
+	Height          int64  `json:"height"`
+	OperatorAddress string `json:"operator_address"`
+	Amount          Coin   `json:"amount"`
 }
