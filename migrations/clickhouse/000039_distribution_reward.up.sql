@@ -7,17 +7,17 @@ CREATE TABLE IF NOT EXISTS spacebox.distribution_reward_topic
 
 CREATE TABLE IF NOT EXISTS spacebox.distribution_reward
 (
-    `operator` String,
-    `amount`   String,
-    `height`   Int64
+    `operator_address` String,
+    `amount`           String,
+    `height`           Int64
 ) ENGINE = ReplacingMergeTree()
-      ORDER BY (`height`, `operator`);
+      ORDER BY (`height`, `operator_address`);
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS distribution_reward_consumer TO spacebox.distribution_reward
 AS
-SELECT JSONExtractString(message, 'operator') as operator,
-       JSONExtractString(message, 'amount')   as amount,
-       JSONExtractInt(message, 'height')      as height
+SELECT JSONExtractString(message, 'operator_address') as operator_address,
+       JSONExtractString(message, 'amount')           as amount,
+       JSONExtractInt(message, 'height')              as height
 FROM spacebox.distribution_reward_topic
-GROUP BY operator, amount, height;
+GROUP BY operator_address, amount, height;
 

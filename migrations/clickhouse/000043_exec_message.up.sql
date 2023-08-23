@@ -16,10 +16,10 @@ CREATE TABLE IF NOT EXISTS spacebox.exec_message
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS exec_message_consumer TO spacebox.exec_message
 AS
-SELECT JSONExtractInt(message, 'height')                                                               as height,
-       JSONExtractInt(message, 'msg_index')                                                            as msg_index,
-       JSONExtractString(message, 'tx_hash')                                                           as tx_hash,
-       JSONExtractString(message, 'grantee')                                                           as grantee,
-       toString(arrayMap(x -> FROM_BASE64(replace(x, '"', '')), JSONExtractArrayRaw(message, 'msgs'))) as msgs
+SELECT JSONExtractInt(message, 'height')                                                                   as height,
+       JSONExtractInt(message, 'msg_index')                                                                as msg_index,
+       JSONExtractString(message, 'tx_hash')                                                               as tx_hash,
+       JSONExtractString(message, 'grantee')                                                               as grantee,
+       toJSONString(arrayMap(x -> FROM_BASE64(replace(x, '"', '')), JSONExtractArrayRaw(message, 'msgs'))) as msgs
 FROM spacebox.exec_message_topic
 GROUP BY height, msg_index, tx_hash, grantee, msgs;
