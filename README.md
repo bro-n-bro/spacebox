@@ -8,7 +8,7 @@ Spacebox is a comprehensive set of open-source tools for data indexation and sto
 
 The overall architecture provided on the scheme:
 
-![spacebox scheme](https://gateway.ipfs.cybernode.ai/ipfs/QmTM5gzuM8HTrQEVgxkHffRByVg2u42ybUYLjrVtitG3Je)
+![spacebox scheme](https://gateway.ipfs.cybernode.ai/ipfs/QmYBeFuB73QNfoEwfFPH5L4ZBsTXyj4rET9ayfNeh6FWEi)
 
 Following [sdk](https://github.com/cosmos/cosmos-sdk/tree/v0.45.13/x) modules supported in current version:
 
@@ -31,8 +31,8 @@ Following [sdk](https://github.com/cosmos/cosmos-sdk/tree/v0.45.13/x) modules su
 2. Crawler MongoDB - light DB to store crawled blocks status(e.g., OK, Error, missing)
 3. Apache Kafka - data broker, a buffer between crawler and main DB
 4. ClickHouse - one of the most powerful DB to store indexed data
-5. Zookeeper - helps to maintain Kafka cluster *(to be removed in release)*
-6. Kafka UI - helps to track performance and check  *(to be removed in release)*
+5. Zookeeper - helps to maintain Kafka cluster *(to remove in release)*
+6. Kafka UI - helps to track performance and check  *(to remove in release)*
 
 Such architecture was chosen to obtain consistency of data being parsed. Not a single block should be missed, nor a single tx message. Also, separating data processing layers allow relatively easy modification: swap the main DB, for example, to one that suits your project better.
 
