@@ -8,7 +8,7 @@ Spacebox is a comprehensive set of open-source tools for data indexation and sto
 
 The overall architecture provided on the scheme:
 
-![spacebox scheme](https://gateway.ipfs.cybernode.ai/ipfs/QmYBeFuB73QNfoEwfFPH5L4ZBsTXyj4rET9ayfNeh6FWEi)
+![spacebox scheme](https://gateway.ipfs.cybernode.ai/ipfs/Qmd4FHZeqa2G3gjrmjvEPujWUcGQUcksXm8PdAF9bNo6qY)
 
 Following [sdk](https://github.com/cosmos/cosmos-sdk/tree/v0.45.13/x) modules supported in current version:
 
