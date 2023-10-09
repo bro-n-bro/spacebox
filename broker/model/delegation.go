@@ -6,6 +6,7 @@ type (
 		DelegatorAddress string `json:"delegator_address"`
 		Coin             Coin   `json:"coin"`
 		Height           int64  `json:"height"`
+		IsActive         bool   `json:"is_active"`
 	}
 	DelegationMessage struct {
 		Delegation

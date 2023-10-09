@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS spacebox.delegation
     `operator_address`  String,
     `delegator_address` String,
     `coin`              String,
-    `height`            Int64
+    `height`            Int64,
+    `is_active`         BOOL DEFAULT true
 ) ENGINE = ReplacingMergeTree(`height`)
       ORDER BY (`operator_address`, `delegator_address`);
 
@@ -18,6 +19,7 @@ AS
 SELECT JSONExtractString(message, 'operator_address')  as operator_address,
        JSONExtractString(message, 'delegator_address') as delegator_address,
        JSONExtractString(message, 'coin')              as coin,
-       JSONExtractInt(message, 'height')            as height
+       JSONExtractInt(message, 'height')               as height,
+       JSONExtractBool(message, 'is_active')           as is_active
 FROM spacebox.delegation_topic
-GROUP BY operator_address, delegator_address, coin, height;
+GROUP BY operator_address, delegator_address, coin, height, is_active;
