@@ -23,6 +23,12 @@ CREATE TABLE IF NOT EXISTS spacebox.cyberlink_message
       ORDER BY (`particle_from`, `particle_to`, `neuron`);
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS cyberlink_message_consumer TO spacebox.cyberlink_message AS
-SELECT particle_from, particle_to, neuron, timestamp, height, tx_hash, msg_index
+SELECT particle_from,
+       particle_to,
+       neuron,
+       parseDateTimeBestEffortOrZero(timestamp) AS timestamp,
+       height,
+       tx_hash,
+       msg_index
 FROM spacebox.cyberlink_message_topic
 GROUP BY particle_from, particle_to, neuron, timestamp, height, tx_hash, msg_index;
