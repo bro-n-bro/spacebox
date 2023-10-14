@@ -1,34 +1,28 @@
--- 000060_cyber_link_message.up.sql TODO: temporary
+-- 000060_cyber_link_message.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.cyber_link_message_topic
 (
-    `particle_from` String,
-    `particle_to`   String,
-    `neuron`        String,
-    `timestamp`     TIMESTAMP,
     `height`        Int64,
+    `msg_index`     Int64,
+    `link_index`    Int64,
     `tx_hash`       String,
-    `msg_index`     Int64
+    `neuron`        String,
+    `particle_from` String,
+    `particle_to`   String
 ) ENGINE = Kafka('kafka:9093', 'cyber_link_message', 'spacebox', 'JSONEachRow');
 
 CREATE TABLE IF NOT EXISTS spacebox.cyber_link_message
 (
-    `particle_from` String,
-    `particle_to`   String,
-    `neuron`        String,
-    `timestamp`     TIMESTAMP,
     `height`        Int64,
+    `msg_index`     Int64,
+    `link_index`    Int64,
     `tx_hash`       String,
-    `msg_index`     Int64
+    `neuron`        String,
+    `particle_from` String,
+    `particle_to`   String
 ) ENGINE = ReplacingMergeTree()
-      ORDER BY (`particle_from`, `particle_to`, `neuron`);
+      ORDER BY (`height`, `msg_index`, `link_index`);
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS cyber_link_message_consumer TO spacebox.cyber_link_message AS
-SELECT particle_from,
-       particle_to,
-       neuron,
-       parseDateTimeBestEffortOrZero(timestamp) AS timestamp,
-       height,
-       tx_hash,
-       msg_index
+SELECT height, msg_index, link_index, tx_hash, neuron, particle_from, particle_to
 FROM spacebox.cyber_link_message_topic
-GROUP BY particle_from, particle_to, neuron, timestamp, height, tx_hash, msg_index;
+GROUP BY height, msg_index, link_index, tx_hash, neuron, particle_from, particle_to;

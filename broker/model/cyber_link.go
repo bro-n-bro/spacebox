@@ -3,12 +3,12 @@ package model
 type (
 	// CyberLink represents cyber_link
 	CyberLink struct {
-		ParticleFrom    string // Index field
-		ParticleTo      string // Index field
-		Neuron          string // Index field
-		Timestamp       string //
-		TransactionHash string //
-		Height          int64  //
+		ParticleFrom string // Index field
+		ParticleTo   string // Index field
+		Neuron       string // Index field
+		Timestamp    string //
+		TxHash       string //
+		Height       int64  //
 	}
 
 	// CyberLinkMessage represents cyber_link message
