@@ -1,7 +1,7 @@
 -- 000058_slashing_params.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.slashing_params_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'slashing_params', 'spacebox', 'JSONAsString');
 
 CREATE TABLE IF NOT EXISTS spacebox.slashing_params

@@ -1,9 +1,11 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type (
-	ValidatorPrecommit struct {
+	ValidatorPreCommit struct {
 		Height           int64     `json:"height"`            //
 		ValidatorAddress string    `json:"validator_address"` //
 		BlockIDFlag      uint64    `json:"block_id_flag"`     //

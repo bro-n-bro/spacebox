@@ -1,24 +1,24 @@
 -- 000060_cyber_link_message.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.cyber_link_message_topic
 (
-    `height`        Int64,
-    `msg_index`     Int64,
-    `link_index`    Int64,
     `tx_hash`       String,
     `neuron`        String,
     `particle_from` String,
-    `particle_to`   String
+    `particle_to`   String,
+    `height`        Int64,
+    `msg_index`     Int64,
+    `link_index`    Int64
 ) ENGINE = Kafka('kafka:9093', 'cyber_link_message', 'spacebox', 'JSONEachRow');
 
 CREATE TABLE IF NOT EXISTS spacebox.cyber_link_message
 (
-    `height`        Int64,
-    `msg_index`     Int64,
-    `link_index`    Int64,
     `tx_hash`       String,
     `neuron`        String,
     `particle_from` String,
-    `particle_to`   String
+    `particle_to`   String,
+    `height`        Int64,
+    `msg_index`     Int64,
+    `link_index`    Int64
 ) ENGINE = ReplacingMergeTree()
       ORDER BY (`height`, `msg_index`, `link_index`);
 

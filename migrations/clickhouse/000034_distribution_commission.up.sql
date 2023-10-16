@@ -1,7 +1,7 @@
 -- 000034_distribution_commission.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.distribution_commission_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'distribution_commission', 'spacebox', 'JSONAsString');
 
 

@@ -1,7 +1,7 @@
 -- 000033_submit_proposal_message.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.submit_proposal_message_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'submit_proposal_message', 'spacebox', 'JSONAsString');
 
 CREATE TABLE IF NOT EXISTS spacebox.submit_proposal_message

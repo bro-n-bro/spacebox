@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS spacebox.cyber_link_topic
     `particle_from` String,
     `particle_to`   String,
     `neuron`        String,
+    `tx_hash`       String,
     `timestamp`     String,
-    `height`        Int64,
-    `tx_hash`       String
+    `height`        Int64
 ) ENGINE = Kafka('kafka:9093', 'cyber_link', 'spacebox', 'JSONEachRow');
 
 CREATE TABLE IF NOT EXISTS spacebox.cyber_link
@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS spacebox.cyber_link
     `particle_from` String,
     `particle_to`   String,
     `neuron`        String,
+    `tx_hash`       String,
     `timestamp`     TIMESTAMP,
-    `height`        Int64,
-    `tx_hash`       String
+    `height`        Int64
 ) ENGINE = ReplacingMergeTree()
       ORDER BY (`particle_from`, `particle_to`, `neuron`);
 
