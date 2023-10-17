@@ -4,10 +4,11 @@ type (
 	// BandwidthParams represents bandwidth params
 	BandwidthParams struct {
 		Height int64              `json:"height"` //
-		Params RawBandWidthParams `json:"params"` //
+		Params RawBandwidthParams `json:"params"` //
 	}
 
-	RawBandWidthParams struct {
+	// RawBandwidthParams represents bandwidth_params
+	RawBandwidthParams struct {
 		RecoveryPeriod    uint64  `json:"recovery_period"`     //
 		AdjustPricePeriod uint64  `json:"adjust_price_period"` //
 		BasePrice         float64 `json:"base_price"`          //
