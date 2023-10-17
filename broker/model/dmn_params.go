@@ -1,14 +1,14 @@
 package model
 
 type (
-	// DMNParams represents DMParams with Height
+	// DMNParams represents RawDMNParams with Height
 	DMNParams struct {
-		Height int64    `json:"height"` //
-		Params DMParams `json:"params"` //
+		Height int64        `json:"height"` //
+		Params RawDMNParams `json:"params"` //
 	}
 
-	// DMParams represents dmn_params
-	DMParams struct {
+	// RawDMNParams represents dmn_params
+	RawDMNParams struct {
 		MaxSlots int64 `json:"max_slots"`
 		MaxGas   int64 `json:"max_gas"`
 		FeeTTL   int64 `json:"fee_ttl"`

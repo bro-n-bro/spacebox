@@ -1,6 +1,13 @@
 package model
 
 type (
+	GovParams struct {
+		DepositParams DepositParams `json:"deposit_params"` //
+		VotingParams  VotingParams  `json:"voting_params"`  //
+		TallyParams   TallyParams   `json:"tally_params"`   //
+		Height        int64         `json:"height"`         //
+	}
+
 	// VotingParams contains the voting parameters of the x/gov module
 	VotingParams struct {
 		VotingPeriod int64 `json:"voting_period,omitempty"` //
@@ -17,12 +24,5 @@ type (
 		Quorum        float64 `json:"quorum,omitempty"`         //
 		Threshold     float64 `json:"threshold,omitempty"`      //
 		VetoThreshold float64 `json:"veto_threshold,omitempty"` //
-	}
-
-	GovParams struct {
-		DepositParams DepositParams `json:"deposit_params"` //
-		VotingParams  VotingParams  `json:"voting_params"`  //
-		TallyParams   TallyParams   `json:"tally_params"`   //
-		Height        int64         `json:"height"`         //
 	}
 )
