@@ -1,4 +1,4 @@
--- 000062_particle.up.sql TODO: temporary
+-- 000062_particle.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.particle_topic
 (
     `particle`  String,
