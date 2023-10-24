@@ -7,7 +7,7 @@ type (
 		Alias       string `json:"alias"`       //
 		Timestamp   string `json:"timestamp"`   //
 		TxHash      string `json:"tx_hash"`     //
-		Value       Coin   `json:"value"`       //
+		Value       Coins  `json:"value"`       //
 		Height      int64  `json:"height"`      //
 		IsActive    bool   `json:"is_active"`   //
 	}
