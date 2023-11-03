@@ -1,5 +1,5 @@
--- 000061_cyber_link.up.sql
-CREATE TABLE IF NOT EXISTS spacebox.cyber_link_topic
+-- 000061_cyberlink.up.sql
+CREATE TABLE IF NOT EXISTS spacebox.cyberlink_topic
 (
     `particle_from` String,
     `particle_to`   String,
@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS spacebox.cyber_link_topic
     `tx_hash`       String,
     `timestamp`     String,
     `height`        Int64
-) ENGINE = Kafka('kafka:9093', 'cyber_link', 'spacebox', 'JSONEachRow');
+) ENGINE = Kafka('kafka:9093', 'cyberlink', 'spacebox', 'JSONEachRow');
 
-CREATE TABLE IF NOT EXISTS spacebox.cyber_link
+CREATE TABLE IF NOT EXISTS spacebox.cyberlink
 (
     `particle_from` String,
     `particle_to`   String,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS spacebox.cyber_link
 ) ENGINE = ReplacingMergeTree()
       ORDER BY (`particle_from`, `particle_to`, `neuron`);
 
-CREATE MATERIALIZED VIEW IF NOT EXISTS cyber_link_consumer TO spacebox.cyber_link AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS cyberlink_consumer TO spacebox.cyberlink AS
 SELECT particle_from, particle_to, neuron, parseDateTimeBestEffortOrZero(timestamp) AS timestamp, height, tx_hash
-FROM spacebox.cyber_link_topic
+FROM spacebox.cyberlink_topic
 GROUP BY particle_from, particle_to, neuron, timestamp, height, tx_hash;
