@@ -1,7 +1,7 @@
 -- 000038_create_validator_message.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.create_validator_message_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'create_validator_message', 'spacebox', 'JSONAsString');
 
 CREATE TABLE IF NOT EXISTS spacebox.create_validator_message

@@ -1,7 +1,7 @@
 -- 000048_proposer_reward.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.proposer_reward_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'proposer_reward', 'spacebox', 'JSONAsString');
 
 CREATE TABLE IF NOT EXISTS spacebox.proposer_reward

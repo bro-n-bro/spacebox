@@ -1,7 +1,7 @@
 -- 000039_distribution_reward.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.distribution_reward_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'distribution_reward', 'spacebox', 'JSONAsString');
 
 

@@ -1,7 +1,7 @@
 -- 000056_liquidity_pool.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.liquidity_pool_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'liquidity_pool', 'spacebox', 'JSONAsString');
 
 

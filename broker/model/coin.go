@@ -1,8 +1,10 @@
 package model
 
-type Coins []Coin
+type (
+	Coin struct {
+		Denom  string  `json:"denom"`  //
+		Amount float64 `json:"amount"` //
+	}
 
-type Coin struct {
-	Denom  string  `json:"denom"`
-	Amount float64 `json:"amount"`
-}
+	Coins []Coin
+)

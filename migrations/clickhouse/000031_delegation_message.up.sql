@@ -1,7 +1,7 @@
 -- 000031_delegation_message.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.delegation_message_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'delegation_message', 'spacebox', 'JSONAsString');
 
 CREATE TABLE IF NOT EXISTS spacebox.delegation_message

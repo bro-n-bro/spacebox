@@ -1,7 +1,7 @@
 -- 000032_withdraw_validator_commission_message.up.sql
 CREATE TABLE IF NOT EXISTS spacebox.withdraw_validator_commission_message_topic
 (
-    message String
+    `message` String
 ) ENGINE = Kafka('kafka:9093', 'withdraw_validator_commission_message', 'spacebox', 'JSONAsString');
 
 CREATE TABLE IF NOT EXISTS spacebox.withdraw_validator_commission_message
