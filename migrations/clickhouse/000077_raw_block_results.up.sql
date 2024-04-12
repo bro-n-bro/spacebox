@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS spacebox.raw_block_results
     `begin_block_events`      String, -- // Correct JSON array string, can be Null
     `end_block_events`        String, -- // Correct JSON array string, can be Null
     `validator_updates`       String, -- // Correct JSON array string, can be Null
-    `consensus_param_updates` String  -- // Correct JSON string
+    `consensus_param_updates` String, -- // Correct JSON string
+    `timestamp`               DATETIME
 ) ENGINE = ReplacingMergeTree(`height`)
       ORDER BY (`height`);
 
@@ -21,6 +22,7 @@ SELECT JSONExtractInt(message, 'height')                     as height,
        JSONExtractString(message, 'begin_block_events')      as begin_block_events,
        JSONExtractString(message, 'end_block_events')        as end_block_events,
        JSONExtractString(message, 'validator_updates')       as validator_updates,
-       JSONExtractString(message, 'consensus_param_updates') as consensus_param_updates
+       JSONExtractString(message, 'consensus_param_updates') as consensus_param_updates,
+       parseDateTimeBestEffortOrZero(JSONExtractString(message, 'timestamp')) AS timestamp
 FROM spacebox.raw_block_results_topic
-GROUP BY height, txs_results, begin_block_events, end_block_events, validator_updates, consensus_param_updates;
+GROUP BY height, txs_results, begin_block_events, end_block_events, validator_updates, consensus_param_updates, timestamp;
