@@ -10,8 +10,7 @@ CREATE TABLE spacebox.raw_block_topic
         SETTINGS kafka_broker_list = 'kafka:9093',
             kafka_topic_list = 'raw_block',
             kafka_group_name = 'spacebox',
-            kafka_format = 'JSONAsString',
-            kafka_flush_interval_ms = 3600000;
+            kafka_format = 'JSONAsString';
 
 -- spacebox.raw_block definition
 
@@ -53,8 +52,7 @@ CREATE TABLE spacebox.raw_block_results_topic
         SETTINGS kafka_broker_list = 'kafka:9093',
             kafka_topic_list = 'raw_block_results',
             kafka_group_name = 'spacebox',
-            kafka_format = 'JSONAsString',
-            kafka_flush_interval_ms = 3600000;
+            kafka_format = 'JSONAsString';
 
 
 -- spacebox.raw_block_results definition
@@ -85,8 +83,7 @@ CREATE TABLE spacebox.raw_transaction_topic
         SETTINGS kafka_broker_list = 'kafka:9093',
             kafka_topic_list = 'raw_transaction',
             kafka_group_name = 'spacebox',
-            kafka_format = 'JSONAsString',
-            kafka_flush_interval_ms = 3600000;
+            kafka_format = 'JSONAsString';
 
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS raw_block_results_consumer TO spacebox.raw_block_results AS
