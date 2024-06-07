@@ -36,8 +36,11 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9093
+      AUTH_TYPE: "LOGIN_FORM"
+      SPRING_SECURITY_USER_NAME: default
+      SPRING_SECURITY_USER_PASSWORD: ${KAFKA_UI_PASSWORD:-password}
   zookeeper:
-    image: bitnami/zookeeper:3.8.0
+    image: bitnami/zookeeper:3.9.2
     ports:
       - '2181:2181'
     environment:
@@ -47,7 +50,7 @@ services:
     volumes:
       - ./volumes/zookeeper:/bitnami/zookeeper
   kafka:
-    image: bitnami/kafka:3.3.1
+    image: bitnami/kafka:3.7.0
     ports:
       - '9092:9092'
       - '9093:9093'
@@ -61,6 +64,8 @@ services:
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
       - KAFKA_CFG_DELETE_TOPIC_ENABLE=true
       - KAFKA_CFG_LOG_RETENTION_BYTES=16106127360
+      - KAFKA_CFG_MESSAGE_MAX_BYTES=${MAX_MESSAGE_MAX_BYTES}
+      - KAFKA_CFG_REPLICA_FETCH_MAX_BYTES=157286400
     volumes:
       - ./volumes/kafka:/bitnami/kafka
     restart: unless-stopped
@@ -74,14 +79,17 @@ services:
       retries: 5
   migration:
     image: migrate/migrate:latest
-    command: -path=/migrations/clickhouse -database="clickhouse://clickhouse:9000/spacebox?username=default&x-multi-statement=true" up
+    command: |
+      -path=/migrations/clickhouse 
+      -database="clickhouse://clickhouse:9000/spacebox?username=default&x-multi-statement=true&password=${CLICKHOUSE_PASSWORD:-password}" 
+      up
     volumes:
       - ./migrations:/migrations
     depends_on:
       clickhouse:
         condition: service_healthy
   clickhouse:
-    image: clickhouse/clickhouse-server:22.9.7
+    image: clickhouse/clickhouse-server:24.5.1
     restart: unless-stopped
     hostname: clickhouse
     ulimits:
@@ -96,6 +104,8 @@ services:
     environment:
       CLICKHOUSE_INIT_TIMEOUT: 60
       CLICKHOUSE_DB: spacebox
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-password}
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping
       interval: 60s
