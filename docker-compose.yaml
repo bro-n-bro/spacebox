@@ -22,6 +22,8 @@ services:
         condition: service_started
       mongo-crawler:
         condition: service_started
+    networks:
+      - spacebox
   kafka-ui:
     container_name: spacebox-kafka-ui
     image: provectuslabs/kafka-ui:latest
@@ -39,6 +41,8 @@ services:
       AUTH_TYPE: "LOGIN_FORM"
       SPRING_SECURITY_USER_NAME: default
       SPRING_SECURITY_USER_PASSWORD: ${KAFKA_UI_PASSWORD:-password}
+    networks:
+      - spacebox
   zookeeper:
     image: bitnami/zookeeper:3.9.2
     ports:
@@ -49,6 +53,8 @@ services:
     container_name: spacebox-zookeeper
     volumes:
       - ./volumes/zookeeper:/bitnami/zookeeper
+    networks:
+      - spacebox
   kafka:
     image: bitnami/kafka:3.7.0
     ports:
@@ -77,6 +83,8 @@ services:
       interval: 120s
       timeout: 60s
       retries: 5
+    networks:
+      - spacebox
   migration:
     image: migrate/migrate:latest
     command: |
@@ -88,6 +96,8 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
+    networks:
+      - spacebox
   clickhouse:
     image: clickhouse/clickhouse-server:24.5.1
     restart: unless-stopped
@@ -116,6 +126,8 @@ services:
       - ./volumes/clickhouse/logs:/var/log/clickhouse-server
       - ./config/clickhouse/users.d/:/etc/clickhouse-server/users.d/
       - ./config/clickhouse/config.d/:/etc/clickhouse-server/config.d/
+    networks:
+      - spacebox
   mongo-crawler:
     image: mongo:6.0.3
     restart: always
@@ -128,3 +140,13 @@ services:
       - '27018:27017'
     volumes:
       - ./volumes/mongo/crawler:/data/db
+    networks:
+      - spacebox
+networks:
+  spacebox:
+    driver: bridge
+    ipam:
+        driver: default
+        config:
+            - subnet: 172.28.1.0/24
+
