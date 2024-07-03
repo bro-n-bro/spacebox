@@ -1,0 +1,6 @@
+site_name: Spacebox docs
+nav:
+  - Home: index.md
+  - Getting started: getting_started.md
+theme:
+  name: readthedocs
