@@ -30,5 +30,5 @@ from (
         arrayJoin(JSONExtractArrayRaw(JSONExtractString(tx, 'body', 'messages'))) AS msg,
         JSONExtractString(msg, '@type') AS type
     from spacebox.raw_transaction
-    where type = '/cosmos.staking.v1beta1.MsgCreateValidator'
+    where type = '/cosmos.staking.v1beta1.MsgCreateValidator' and code = 0
 )

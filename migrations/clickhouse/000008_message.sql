@@ -25,4 +25,5 @@ from (
         arrayJoin(JSONExtractArrayRaw(JSONExtractString(tx, 'body', 'messages'))) AS msg,
         JSONExtractString(msg, '@type') AS type
     from spacebox.raw_transaction
+    where code = 0
 )

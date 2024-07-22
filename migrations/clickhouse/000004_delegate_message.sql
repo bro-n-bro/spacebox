@@ -3,8 +3,7 @@ CREATE TABLE IF NOT EXISTS spacebox.delegation_message
     `timestamp` DateTime,
     `operator_address`  String,
     `delegator_address` String,
-    `coin`              String,
-    `amount`            Int256,
+    `amount`            String,
     `height`            Int64,
     `tx_hash`           String
 ) ENGINE = MergeTree()
@@ -19,13 +18,12 @@ select
     txhash as tx_hash,
     JSONExtractString(msg, 'delegatorAddress') as delegator_address,
     JSONExtractString(msg, 'validatorAddress') as operator_address,
-    JSONExtractString(JSONExtractString(msg, 'amount'), 'denom') as coin,
-    toInt256(JSONExtractString(JSONExtractString(msg, 'amount'), 'amount')) as amount
+    JSONExtractString(msg, 'amount') as amount
 from (
     select
         *,
         arrayJoin(JSONExtractArrayRaw(JSONExtractString(tx, 'body', 'messages'))) AS msg,
         JSONExtractString(msg, '@type') AS type
     from spacebox.raw_transaction
-    where type = '/cosmos.staking.v1beta1.MsgDelegate'
+    where type = '/cosmos.staking.v1beta1.MsgDelegate' and code = 0
 )
