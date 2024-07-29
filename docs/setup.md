@@ -212,9 +212,9 @@ Timeout to stop application. Do not change without a strict purpose.
 
 `LOG_LEVEL`
 
-Supported values: `info`, `debug`
+Supported values: `info`, `debug`,  `error`.
 
-Log level of the crawler.  Debug level will produce more logs, including checks of the previously parsed blocks.
+Debug level will produce more logs, including checks of the previously parsed blocks. Error log will show only errors if there's any.
 
 ---
 
@@ -222,7 +222,7 @@ Log level of the crawler.  Debug level will produce more logs, including checks 
 
 Default value: false
 
-Intended for debugging purposes mostly. In case of *`panic`* will output a full error log, without crashing the crawler.
+Intended for debugging purposes mostly. In case of *`panic`* will output a full error log, without crashing the crawler. Significantly(!) lowers the perfomance.
 
 ---
 
@@ -231,6 +231,7 @@ Intended for debugging purposes mostly. In case of *`panic`* will output a full 
 Default value: 0
 
 Height to start crawling from. Ex: for `cosmoshub-4` must be set to 5200792 as it was the first block in this chain.
+If set to 0 genesis will be parced automatically.
 
 ---
 
@@ -265,7 +266,7 @@ If set to **true** crawler will attempt to re-index the blocks that had errors d
 
 `PROCESS_GENESIS`
 
-If set to **true** crawler will parce genesis to have genesis initial data in db.
+If set to **true** crawler will parce genesis to have genesis initial data in db. If `START_HEIGHT` set to 0 genesis would be parced as well.
 
 ### Text metrics
 
