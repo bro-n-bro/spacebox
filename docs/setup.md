@@ -40,7 +40,6 @@ SUBSCRIBE_NEW_BLOCKS=true # pull actual blocks
 
 # Chain settings
 CHAIN_PREFIX=cosmos # Prefix of indexing chain
-WS_ENABLED=true # Websocket enabled
 RPC_URL=http://0.0.0.0:26657 # RPC API
 GRPC_URL=0.0.0.0:9090 # GRPC API, no HTTP\S prefix
 GRPC_SECURE_CONNECTION=false # GRPC secure connection
@@ -288,6 +287,14 @@ Specify the account prefix for the chain you going to index. Typically found in 
 
 `RPC_URL` & `GRPC_URL`
 
+`GRPC_TIMEOUT`
+
+Timeout for the GRPC requests. Default value: 15s.
+
+`RPC_TIMEOUT`
+
+Timeout for the RPC requests. Default value: 15s.
+
 Node RPC and GRPC endpoints. By default served on port 26657 and 9090.
 
 >[TIP!] For better performance, we advise running the indexer as "close" to the chain node as possible, ideally on the same machine.
@@ -338,7 +345,7 @@ Count of the partitions in the broker. Do not change without a strict purpose.
 
 `MAX_MESSAGE_MAX_BYTES`
 
-Define the maximum size of the message in Kafka. Requires Kafka container recreation.
+Define the maximum size of the message in Kafka. Requires Kafka container recreation. Default value: 5242880 (5Mb).
 
 `BATCH_PRODUCER`
 
