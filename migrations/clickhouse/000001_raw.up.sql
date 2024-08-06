@@ -127,15 +127,15 @@ CREATE TABLE spacebox.raw_transaction
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS raw_transaction_consumer TO spacebox.raw_transaction AS
 SELECT parseDateTimeBestEffortOrZero(JSONExtractString(message, 'tx_response', 'timestamp')) AS timestamp,
-       toInt64(JSONExtractString(message, 'tx_response', 'height'))                          AS height,
+       JSONExtractInt(message, 'tx_response', 'height')                                      AS height,
        JSONExtractString(message, 'tx_response', 'txhash')                                   AS txhash,
        JSONExtractString(message, 'tx_response', 'codespace')                                AS codespace,
        JSONExtractInt(message, 'tx_response', 'code')                                        AS code,
        JSONExtractString(message, 'tx_response', 'rawLog')                                   AS raw_log,
        JSONExtractString(message, 'tx_response', 'logs')                                     AS logs,
        JSONExtractString(message, 'tx_response', 'info')                                     AS info,
-       toInt64(JSONExtractString(message, 'tx_response', 'gasWanted'))                       AS gas_wanted,
-       toInt64(JSONExtractString(message, 'tx_response', 'gasUsed'))                         AS gas_used,
+       JSONExtractInt(message, 'tx_response', 'gasWanted')                                   AS gas_wanted,
+       JSONExtractInt(message, 'tx_response', 'gasUsed')                                     AS gas_used,
        JSONExtractString(message, 'tx_response', 'tx')                                       AS tx,
        JSONExtractString(message, 'tx_response', 'events')                                   AS events,
        JSONExtractString(message, 'signer')                                                  AS signer
