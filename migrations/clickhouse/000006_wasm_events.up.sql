@@ -12,16 +12,7 @@ ENGINE = MergeTree
 ORDER BY (height, contract_address, action, signer, txhash)
 
 
-CREATE MATERIALIZED VIEW spacebox.wasm_events_writer TO spacebox.wasm_events
-(
-    `timestamp` DateTime,
-    `height` Int64,
-    `txhash` String,
-    `signer` String,
-    `contract_address` String,
-    `action` String,
-    `attributes` String
-) AS
+CREATE MATERIALIZED VIEW spacebox.wasm_events_writer TO spacebox.wasm_events AS
 WITH events AS
     (
         SELECT
@@ -38,8 +29,6 @@ WITH events AS
 SELECT
     timestamp,
     height,
-    txhash,
-    signer,
     JSONExtractString(arrayFilter(x -> (JSONExtractString(x,
  'key') = '_contract_address'),
  JSONExtractArrayRaw(attributes))[1],
@@ -48,6 +37,8 @@ SELECT
  'key') = 'action'),
  JSONExtractArrayRaw(attributes))[1],
  'value') AS action,
-    attributes
+ 	attributes,
+    signer,
+    txhash
 FROM events
 WHERE type = 'wasm'

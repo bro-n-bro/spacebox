@@ -17,7 +17,7 @@ ORDER BY (height,
  denom)
 SETTINGS index_granularity = 8192;
 
-INSERT INTO spacebox.debs_and_creds 
+INSERT INTO spacebox.genesis_balances
 WITH raw_balances AS (
 	SELECT 
 		arrayJoin(JSONExtractArrayRaw(JSONExtractString(app_state, 'bank', 'balances'))) AS raw
