@@ -62,8 +62,7 @@ CREATE TABLE spacebox.raw_block_results
 
     `height`                  Int64,
     `txs_results`             String,
-    `begin_block_events`      String,
-    `end_block_events`        String,
+    `finalize_block_events`   String,
     `validator_updates`       String,
     `consensus_param_updates` String,
     `timestamp`               DATETIME
@@ -89,13 +88,12 @@ CREATE TABLE spacebox.raw_transaction_topic
 CREATE MATERIALIZED VIEW IF NOT EXISTS raw_block_results_consumer TO spacebox.raw_block_results AS
 SELECT JSONExtractInt(message, 'height')                                      AS height,
        JSONExtractString(message, 'txs_results')                              AS txs_results,
-       JSONExtractString(message, 'begin_block_events')                       AS begin_block_events,
-       JSONExtractString(message, 'end_block_events')                         AS end_block_events,
+       JSONExtractString(message, 'finalize_block_events')                    AS finalize_block_events,
        JSONExtractString(message, 'validator_updates')                        AS validator_updates,
        JSONExtractString(message, 'consensus_param_updates')                  AS consensus_param_updates,
        parseDateTimeBestEffortOrZero(JSONExtractString(message, 'timestamp')) AS timestamp
 FROM spacebox.raw_block_results_topic
-GROUP BY height, txs_results, begin_block_events, end_block_events, validator_updates, consensus_param_updates,
+GROUP BY height, txs_results, finalize_block_events, validator_updates, consensus_param_updates,
          timestamp;
 
 -- spacebox.raw_transaction definition
