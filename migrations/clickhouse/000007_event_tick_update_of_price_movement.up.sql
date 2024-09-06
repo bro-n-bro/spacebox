@@ -14,7 +14,7 @@ ORDER BY (timestamp,
  TokenOne,
  TickIndex,
  price)
-SETTINGS index_granularity = 8192
+SETTINGS index_granularity = 8192;
 
 
 CREATE MATERIALIZED VIEW spacebox.dex_message_event_tick_update_of_price_movement_writer TO spacebox.dex_message_event_tick_update_of_price_movement (
@@ -212,4 +212,4 @@ WHERE
       ) [1],
       'value'
     )
-  )
+  );

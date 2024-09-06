@@ -23,7 +23,7 @@ ORDER BY (timestamp,
  TokenIn,
  TickIndex,
  TrancheKey)
-SETTINGS index_granularity = 8192
+SETTINGS index_granularity = 8192;
 
 
 CREATE MATERIALIZED VIEW spacebox.dex_message_event_tick_update_writer TO spacebox.dex_message_event_tick_update
@@ -127,4 +127,4 @@ SELECT
  JSONExtractArrayRaw(attributes))[1],
  'value')) AS Reserves
 FROM dex_message_event
-WHERE action = 'TickUpdate'
+WHERE action = 'TickUpdate';
