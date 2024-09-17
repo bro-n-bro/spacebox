@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Getting started - Spacebox docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Getting started";
+        var mkdocs_page_input_path = "setup.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Spacebox docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Getting started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick start</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get">Get</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set">Set</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#launch">Launch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#issues">Issues?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#upgrading">Upgrading</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#config-options">Config options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#crawler">Crawler</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#text-metrics">Text metrics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chain-settings">Chain settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#broker-settings">Broker settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mongo-settings">Mongo settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#clickhouse-settings">Clickhouse settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#health-checker">Health checker</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../monitoring/">Monitoring</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Spacebox docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setup">Setup</h1>
+<h2 id="requirements">Requirements</h2>
+<p>To operate the Spacebox you'll need an x86-64/arm machine with &gt;8GB of RAM, and &gt;4 CPU cores. For storage it is better to use faster SSD or NVME-like drives, size depends on the chain and TX volume(cosmoshub-4 index utilizes ~1 TB). Spacebox runs in <a href="https://docs.docker.com/engine/install/">Docker</a> with help of<a href="https://docs.docker.com/compose/install/">Docker-compose</a>. Also, you will need the RPC and GRPC endpoints of the chain, which you will index with the appropriate historical state.</p>
+<h2 id="quick-start">Quick start</h2>
+<h3 id="get">Get</h3>
+<p>Clone the <a href="https://github.com/bro-n-bro/spacebox.git">Spacebox</a> repo, it contains everything to get started.</p>
+<p><code>console</code></p>
+<pre><code class="language-console">$ git clone https://github.com/bro-n-bro/spacebox.git
+Cloning into 'spacebox'...
+remote: Enumerating objects: 1111, done.
+remote: Counting objects: 100% (59/59), done.
+remote: Compressing objects: 100% (41/41), done.
+remote: Total 1111 (delta 17), reused 23 (delta 16), pack-reused 1052
+Receiving objects: 100% (1111/1111), 2.82 MiB | 10.48 MiB/s, done.
+Resolving deltas: 100% (601/601), done.
+$ ls spacebox/
+config  docker-compose-local.yaml  docker-compose.yaml  docs  go.mod  LICENSE  migrations  mkdocs.yml  README.md
+</code></pre>
+<h3 id="set">Set</h3>
+<p>Fill .env with chain settings like chain prefix, node RPC &amp; GRPC, and start \ stop height:</p>
+<p><code>.env</code></p>
+<pre><code class="language-bash">START_HEIGHT=5048767  # Start block height
+STOP_HEIGHT=0 # Stop block height, 0 for actual height
+WORKERS_COUNT=15 # Go workers to pull data in async mode
+SUBSCRIBE_NEW_BLOCKS=true # pull actual blocks
+
+
+# Chain settings
+CHAIN_PREFIX=cosmos # Prefix of indexing chain
+RPC_URL=http://0.0.0.0:26657 # RPC API
+GRPC_URL=0.0.0.0:9090 # GRPC API, no HTTP\S prefix
+GRPC_SECURE_CONNECTION=false # GRPC secure connection
+</code></pre>
+<h3 id="launch">Launch</h3>
+<p>When <code>.env</code> is filled to start all containers run:</p>
+<p><code>console</code></p>
+<pre><code class="language-bash">$ docker-compose up -d
+Creating network &quot;spacebox_default&quot; with the default driver
+Creating spacebox_hasura_1         ... done
+Creating spacebox_mongo-crawler_1  ... done
+Creating spacebox_ndc-clickhouse_1 ... done
+Creating spacebox_clickhouse_1     ... done
+Creating spacebox-zookeeper        ... done
+Creating spacebox_postgres_1       ... done
+Creating spacebox_kafka_1          ... done
+Creating spacebox-kafka-ui         ... done
+Creating spacebox_migration_1      ... done
+</code></pre>
+<p>If everything is set correctly you will see the following in <code>spacebox_crawler_1</code>:</p>
+<p><code>console</code></p>
+<pre><code class="language-console">$ docker logs spacebox_crawler_1 -f 
+INF starting app cmp=app version=v1.2.0
+INF module registered cmp=app name=raw version=v1.2.0
+INF all modules registered cmp=app count=1 version=v1.2.0
+INF starting cmp=app service=storage version=v1.2.0
+INF started cmp=app service=storage version=v1.2.0
+INF starting cmp=app service=grpc_client version=v1.2.0
+INF started cmp=app service=grpc_client version=v1.2.0
+INF starting cmp=app service=rpc_client version=v1.2.0
+INF started cmp=app service=rpc_client version=v1.2.0
+INF starting cmp=app service=broker version=v1.2.0
+INF started cmp=app service=broker version=v1.2.0
+INF starting cmp=app service=worker version=v1.2.0
+INF started cmp=app service=worker version=v1.2.0
+INF starting cmp=app service=server version=v1.2.0
+INF listening for new block events cmp=worker version=v1.2.0
+INF started cmp=app service=server version=v1.2.0
+INF starting cmp=app service=health_checker version=v1.2.0
+INF exit not needed cmp=worker version=v1.2.0
+INF started cmp=app service=health_checker version=v1.2.0
+INF start metrics scraper cmp=server version=v1.2.0
+INF application started cmp=app version=v1.2.0
+INF parse block cmp=worker height=1 version=v1.2.0 worker_number=1
+INF parse block cmp=worker height=2 version=v1.2.0 worker_number=11
+INF parse block cmp=worker height=4 version=v1.2.0 worker_number=19
+INF parse block cmp=worker height=5 version=v1.2.0 worker_number=17
+INF parse block cmp=worker height=3 version=v1.2.0 worker_number=6
+</code></pre>
+<p>To stop and remove all containers use the following:</p>
+<p><code>console</code></p>
+<pre><code class="language-bash">docker-compose down
+</code></pre>
+<h3 id="issues">Issues?</h3>
+<p>If after <code>docker-compose up</code> you see the error:</p>
+<p><code>console</code></p>
+<pre><code class="language-console">ERROR: for crawler  Container &quot;d0d8ccc463b8&quot; is unhealthy.
+ERROR: Encountered errors while bringing up the project.
+</code></pre>
+<p>Then it is necessary to grant the ownership of the <code>volumes</code> folder to the docker user (uid 1001):</p>
+<p><code>console</code></p>
+<pre><code class="language-console">$ docker-compose down
+$ chown -R 1001:1001 volumes/
+$ docker-compose up -d
+</code></pre>
+<p>It usually requires around ~2 minutes to start everything. Check the log of each container with <code>docker logs &lt;container_name&gt;</code> to see what's going under the hood. It is possible to adjust some parameters on the fly, edit <code>.env</code>, and restart the appropriate container.</p>
+<h2 id="upgrading">Upgrading</h2>
+<p>Spacebox main part <a href="https://github.com/bro-n-bro/spacebox-crawler/releases">spacebox-crawler</a> follows <a href="https://semver.org/">semantic versioning:</a> <code>MAJOR.MINOR.PATCH</code> + some releases are chain-specific and contain chain name in the tag, e.g. <code>v2.0.0-neutron</code>.</p>
+<p>As long as spacebox is considered as a beta software, every major version upgrade will require re-sync, check the release details for more info on that.</p>
+<p>We recommend using a specified version for the crawler in <code>docker-compose.yml</code>, instead of <code>:latest</code> that will ease troubleshooting and upgrades:</p>
+<p><code>docker-compose.yaml</code></p>
+<pre><code class="language-console">version: &quot;3.9&quot;
+
+services:
+ crawler:
+ image: bronbro/spacebox-crawler:v1.2.0
+</code></pre>
+<p>For upgrade with full resync stop everything remove the volmes folder and start over with the newer version of the crawler:</p>
+<p><code>console</code></p>
+<pre><code class="language-console">$ docker-compose down
+$ rm -rf  volumes/
+$ docker-compose up -d
+</code></pre>
+<p>If an upgrade is happening alongside the chain upgrade, then it is possible to relaunch only the crawler:</p>
+<p><code>console</code></p>
+<pre><code class="language-bash">$ docker stop spacebox_crawler-1
+$ docker rm spacebox_crawler-1
+</code></pre>
+<p>Set new version in <code>docker-compose.yaml</code></p>
+<pre><code class="language-diff">services:
+ crawler:
+-    image: bronbro/spacebox-crawler:v1.2.0
++    image: bronbro/spacebox-crawler:v1.3.0
+</code></pre>
+<p>Start crawler container</p>
+<p><code>console</code></p>
+<pre><code class="language-bash">docker-compose up -d crawler
+</code></pre>
+<p>In such case, indexation with the new version will start since the block you will upgrade the crawler's container. To avoid data inconsistency it might be a good idea to set the upgrade height in the .env as <code>STOP_HEIGHT=</code> and perform the container upgrade safely.</p>
+<h2 id="config-options">Config options</h2>
+<p>Spacebox is configured over environment variables, set in the <code>.env</code> file.</p>
+<blockquote>
+<p>[!TIP]
+To apply .env changes just restart the <code>spacebox_crawler-1</code> container. However same does not apply to the rest of the containers(aka kafka or clickhouse), and they would need to be <strong>recreated.</strong></p>
+</blockquote>
+<h3 id="crawler">Crawler</h3>
+<hr />
+<p><code>START_TIMEOUT</code></p>
+<p>Timeout to start application. Do not change without a strict purpose.</p>
+<hr />
+<p><code>STOP_TIMEOUT</code></p>
+<p>Timeout to stop application. Do not change without a strict purpose.</p>
+<hr />
+<p><code>LOG_LEVEL</code></p>
+<p>Supported values: <code>info</code>, <code>debug</code>,  <code>error</code>.</p>
+<p>Debug level will produce more logs, including checks of the previously parsed blocks. Error log will show only errors if there's any.</p>
+<hr />
+<p><code>RECOVERY_MODE</code></p>
+<p>Default value: false</p>
+<p>Intended for debugging purposes mostly. In case of <em><code>panic</code></em> will output a full error log, without crashing the crawler. Significantly(!) lowers the perfomance.</p>
+<hr />
+<p><code>START_HEIGHT</code></p>
+<p>Default value: 0</p>
+<p>Height to start crawling from. Ex: for <code>cosmoshub-4</code> must be set to 5200792 as it was the first block in this chain.
+If set to 0 genesis will be parced automatically.</p>
+<hr />
+<p><code>STOP_HEIGHT</code></p>
+<p>Default value: 0</p>
+<p>Height to stop indexing at. Might be useful when necessary to index only certain parts of the chain. When set to 0 crawler will pull the latest block from the RPC at the moment of launch and use it as stop height.</p>
+<hr />
+<p><code>WORKERS_COUNT</code></p>
+<p>A number of the asynchronous Go workers inside the crawler. Recommended value: <strong>&lt;=</strong> <em>CPU cores</em> in your system. A huge number of workers may exhaust the RPC node, resulting in missed blocks. Usually, more workers don't mean faster crawling, best performing number is 30-40 workers (even on 88-core machine).</p>
+<hr />
+<p><code>SUBSCRIBE_NEW_BLOCKS</code></p>
+<p>Default value: true</p>
+<p>If set to <strong>false</strong>, the crawler will stop indexation on <code>STOP_HEIGHT</code> without an app crash. If set to <strong>true</strong>, the crawler will subscribe to the new coming blocks over the websocket and will parce them alongside to historical blocks.</p>
+<blockquote>
+<p>[Warning!] If SUBSCRIBE_NEW_BLOCKS=true <code>spacebox_crawler_last_processed_block_height</code> metric will display the highest indexed block, even though historical blocks might still be processed.</p>
+</blockquote>
+<hr />
+<p><code>PROCESS_ERROR_BLOCKS</code></p>
+<p>If set to <strong>true</strong> crawler will attempt to re-index the blocks that had errors during previous processing(based on info stored in Mongo). Re-indexation would be attempted every <code>PROCESS_ERROR_BLOCKS_INTERVAL</code>.</p>
+<hr />
+<p><code>PROCESS_GENESIS</code></p>
+<p>If set to <strong>true</strong> crawler will parce genesis to have genesis initial data in db. If <code>START_HEIGHT</code> set to 0 genesis would be parced as well.</p>
+<h3 id="text-metrics">Text metrics</h3>
+<p><code>METRICS_ENABLED</code></p>
+<p>Enable or disable crawler text metrics endpoint. Compatible with Prometheus.</p>
+<p><code>SERVER_PORT</code></p>
+<p>Specify the port for text metrics.</p>
+<hr />
+<h3 id="chain-settings">Chain settings</h3>
+<p><code>CHAIN_PREFIX</code></p>
+<p>Specify the account prefix for the chain you going to index. Typically found in the beginning of every address, e.g. for <code>cosmos106yp7zw35wftheyyv9f9pe69t8rteumjxjql7m</code> chain prefix is <code>cosmos</code>.</p>
+<p><code>RPC_URL</code> &amp; <code>GRPC_URL</code></p>
+<p><code>GRPC_TIMEOUT</code></p>
+<p>Timeout for the GRPC requests. Default value: 15s.</p>
+<p><code>RPC_TIMEOUT</code></p>
+<p>Timeout for the RPC requests. Default value: 15s.</p>
+<p>Node RPC and GRPC endpoints. By default served on port 26657 and 9090.</p>
+<blockquote>
+<p>[TIP!] For better performance, we advise running the indexer as "close" to the chain node as possible, ideally on the same machine.</p>
+</blockquote>
+<p>If you running both crawler and chain node on the same host you need to add the following line to the crawler's <code>docker-compose.yaml</code> section:</p>
+<p><code>docker-compose.yaml</code></p>
+<pre><code class="language-diff"> ports:
+ - '2112:2112'
++    extra_hosts:
++     - &quot;host.docker.internal:host-gateway&quot;
+</code></pre>
+<p>And set RPC and GRPC addresses in the <code>.env</code> accordingly:</p>
+<pre><code class="language-bash">RPC_URL=http://host.docker.internal:26657
+GRPC_URL=host.docker.internal:9090 
+</code></pre>
+<p>Also, depending on your firewall setup, it might be required to allow connections from the docker subnet to the chain endpoint.</p>
+<p><code>GRPC_SECURE_CONNECTION</code></p>
+<p>Set to <strong>true</strong> if your GRPC endpoint running with SSL encryption enabled. Leave as <strong>false</strong> if connecting directly to node port or within the same localhost.</p>
+<p><code>GRPC_MAX_RECEIVE_MESSAGE_SIZE_BYTES</code></p>
+<p>Defines the maximum size of a single message crawler will process. If you see something similar to <code>...failed to get block: rpc error: code = ResourceExhausted desc = grpc: received message larger than max...</code> in the crawler log - increase this parameter and restart the container with spacebox_cralwer. Chains might have very heavy blocks, for ex. neutron's testnet pion-1 have some block_results of the size ~170mb.</p>
+<hr />
+<h3 id="broker-settings">Broker settings</h3>
+<p><code>BROKER_SERVER</code></p>
+<p>Address of Kafka broker. Do not change without a strict purpose.</p>
+<p><code>BROKER_ENABLED</code></p>
+<p>Enable\disable message publishing messages to the broker. Do not change without a strict purpose.</p>
+<p><code>PARTITIONS_COUNT</code></p>
+<p>Count of the partitions in the broker. Do not change without a strict purpose.</p>
+<p><code>MAX_MESSAGE_MAX_BYTES</code></p>
+<p>Define the maximum size of the message in Kafka. Requires Kafka container recreation. Default value: 5242880 (5Mb).</p>
+<p><code>BATCH_PRODUCER</code></p>
+<p>Enable batch producer to process messages in Kafka by batches. Might increase performance, but considered an experimental feature.</p>
+<p><code>KAFKA_UI_PASSWORD</code></p>
+<p>Password for kafka-UI. Change for production deployment!</p>
+<hr />
+<h3 id="mongo-settings">Mongo settings</h3>
+<p><code>MONGO_CRAWLER_URI</code></p>
+<p>Address of Mongo db. Crawler utilizes mongo-db as a check-list for parsed block status.</p>
+<p><code>MONGO_USER</code></p>
+<p>Mongo username used by the crawler.</p>
+<p><code>MONGO_PASSWORD</code></p>
+<p>Mongo user password used by the crawler. Change for production deployment!</p>
+<p><code>MAX_POOL_SIZE</code></p>
+<p>Maximum pool size in Mongo. Do not change without a strict purpose.</p>
+<p><code>MAX_CONNECTING</code></p>
+<p>Maximum Mongo connections. Do not change without a strict purpose.</p>
+<hr />
+<h3 id="clickhouse-settings">Clickhouse settings</h3>
+<p><code>CLICKHOUSE_PASSWORD</code></p>
+<p>Password for clickhouse <code>default</code> user.  Change for production deployment! Default user will require some privileges upgrade to allow it <a href="https://clickhouse.com/docs/en/operations/access-rights#enabling-sql-user-mode">new users creation</a>.</p>
+<hr />
+<h3 id="health-checker">Health checker</h3>
+<p><code>HEALTHCHECK_ENABLED</code></p>
+<p>If set to <strong>true</strong> the crawler will periodically check the health of the node endpoints, and behave accordingly.</p>
+<p><code>HEALTHCHECK_FATAL_ON_CHECK</code></p>
+<p>If set to <strong>true</strong> the crawler will crush if the health check has failed. That will result in a container restart.</p>
+<p><code>HEALTHCHECK_MAX_LAST_BLOCK_LAG</code></p>
+<p>Interval for the new block to appear in the RPC, to count endpoint healthy.</p>
+<p><code>HEALTHCHECK_INTERVAL</code></p>
+<p>Interval to perform a health check.</p>
+<p><code>HEALTHCHECK_START_DELAY</code></p>
+<p>Delay for the first health check after the start.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../monitoring/" class="btn btn-neutral float-right" title="Monitoring">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../monitoring/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
