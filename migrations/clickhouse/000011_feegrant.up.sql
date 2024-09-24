@@ -4,7 +4,8 @@ CREATE TABLE spacebox.feegrant_msg_allowance
     `height` Int64,
     `txhash` String,
     `granter` String,
-    `grantee` String
+    `grantee` String,
+    `allowance` String
 )
 ENGINE = MergeTree
 ORDER BY (timestamp,
@@ -22,7 +23,8 @@ SELECT
     height,
     txhash,
     JSONExtractString(message, 'granter') as granter,
-    JSONExtractString(message, 'grantee') as grantee
+    JSONExtractString(message, 'grantee') as grantee,
+    JSONExtractString(message, 'allowance') as allowance
 from (
 	SELECT
         timestamp,
