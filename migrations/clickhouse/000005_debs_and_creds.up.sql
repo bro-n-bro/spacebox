@@ -66,3 +66,32 @@ SELECT
  '^\\d+(.*)') AS denom
 FROM txs_events
 WHERE (type = 'coin_received') OR (type = 'coin_spent');
+
+
+CREATE MATERIALIZED VIEW spacebox.debs_and_creds_finalized_block_writer TO spacebox.debs_and_creds
+(
+    `height` Int64,
+    `type` String,
+    `address` String,
+    `coins` String,
+    `amount` Int128,
+    `denom` String
+) AS
+WITH txs_events AS
+  (WITH b64 AS
+     (SELECT height,
+             JSONExtractString(arrayJoin(JSONExtractArrayRaw(finalize_block_events)), 'type') AS TYPE,
+             JSONExtractString(arrayJoin(JSONExtractArrayRaw(finalize_block_events)), 'attributes') AS attributes
+      FROM spacebox.raw_block_results) SELECT height,
+                                              TYPE,
+                                              arrayMap(x -> concat('{"key":"', JSONExtractString(x, 'key'), '","value":"', JSONExtractString(x, 'value'), '","index":', JSONExtractRaw(x, 'index'), '}'), JSONExtractArrayRaw(attributes)) AS attributes
+   FROM b64)
+SELECT height,
+       TYPE,
+       if(TYPE = 'coin_spent', JSONExtractString(arrayFilter(x -> (JSONExtractString(x, 'key') = 'spender'), attributes)[1], 'value'), JSONExtractString(arrayFilter(x -> (JSONExtractString(x, 'key') = 'receiver'), attributes)[1], 'value')) AS address,
+       arrayJoin(splitByChar(',', JSONExtractString(arrayFilter(x -> (JSONExtractString(x, 'key') = 'amount'), attributes)[1], 'value'))) AS coins,
+       if(TYPE = 'coin_spent', -toInt128OrZero(extract(coins, '^(\\d+)')), toInt128OrZero(extract(coins, '^(\\d+)'))) AS amount,
+       extract(coins, '^\\d+(.*)') AS denom
+FROM txs_events
+WHERE (TYPE = 'coin_received')
+  OR (TYPE = 'coin_spent');
