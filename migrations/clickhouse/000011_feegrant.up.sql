@@ -11,7 +11,6 @@ ENGINE = MergeTree
 ORDER BY (timestamp,
  height,
  txhash,
- type,
  granter,
  grantee)
 SETTINGS index_granularity = 8192;

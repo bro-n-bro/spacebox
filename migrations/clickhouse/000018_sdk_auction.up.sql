@@ -25,13 +25,19 @@ select
 	JSONExtractString(message, 'bid', 'denom') as denom,
 	JSONExtractString(message, 'bid', 'amount') as amount,
 	JSONExtractString(message, 'transactions') as transactions
-from
-(
+from (
 	SELECT
-		`timestamp`,
-		height,
-		txhash,
-		message
-	FROM spacebox.message
-	WHERE `type` = '/sdk.auction.v1.MsgAuctionBid'
+        timestamp,
+        height,
+        txhash,
+        JSONExtractString(arrayJoin(JSONExtractArrayRaw(JSONExtractString(JSONExtractString(tx,
+	 'body'),
+	 'messages'))),
+	 '@type') AS type,
+	        signer,
+	        arrayJoin(JSONExtractArrayRaw(JSONExtractString(JSONExtractString(tx,
+	 'body'),
+	 'messages'))) AS message
+	    FROM spacebox.raw_transaction
+    WHERE code = 0 and type = '/sdk.auction.v1.MsgAuctionBid'
 )

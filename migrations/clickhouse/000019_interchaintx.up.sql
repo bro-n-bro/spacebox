@@ -20,13 +20,19 @@ select
 	txhash,
 	JSONExtractString(message, 'owner') as owner,
 	JSONExtractString(message, 'connectionId') as connection_id
-from
-(
+from (
 	SELECT
-		`timestamp`,
-		height,
-		txhash,
-		message
-	FROM spacebox.message
-	WHERE `type` = '/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount'
+        timestamp,
+        height,
+        txhash,
+        JSONExtractString(arrayJoin(JSONExtractArrayRaw(JSONExtractString(JSONExtractString(tx,
+	 'body'),
+	 'messages'))),
+	 '@type') AS type,
+	        signer,
+	        arrayJoin(JSONExtractArrayRaw(JSONExtractString(JSONExtractString(tx,
+	 'body'),
+	 'messages'))) AS message
+	    FROM spacebox.raw_transaction
+    WHERE code = 0 and type = '/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount'
 )

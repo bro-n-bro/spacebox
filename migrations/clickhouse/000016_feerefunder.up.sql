@@ -15,7 +15,7 @@ ORDER BY (
 SETTINGS index_granularity = 8192;
 
 
-CREATE MATERIALIZED VIEW spacebox.feerefunder_lock_fees_writer TO spacebox.feerefunder AS
+CREATE MATERIALIZED VIEW spacebox.feerefunder_lock_fees_writer TO spacebox.feerefunder_lock_fees AS
 select
 	`timestamp`,
 	height,
@@ -35,6 +35,8 @@ from (
 	from spacebox.raw_transaction
 	where type = 'lock_fees'
 );
+
+
 
 CREATE TABLE spacebox.feerefunder_distribute_ack_fee (
     `timestamp` DateTime,
