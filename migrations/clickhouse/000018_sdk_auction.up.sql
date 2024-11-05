@@ -24,7 +24,7 @@ select
 	JSONExtractString(message, 'bidder') as bidder,
 	JSONExtractString(message, 'bid', 'denom') as denom,
 	JSONExtractString(message, 'bid', 'amount') as amount,
-	JSONExtractString(message, 'transactions') as transactions
+	JSONExtractArrayRaw(JSONExtractString(message, 'transactions')) as transactions
 from (
 	SELECT
         timestamp,

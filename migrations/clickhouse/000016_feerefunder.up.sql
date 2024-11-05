@@ -93,7 +93,7 @@ ORDER BY (
 SETTINGS index_granularity = 8192;
 
 
-CREATE MATERIALIZED VIEW spacebox.feerefunder_distribute_timeout_fee TO spacebox.feerefunder_distribute_timeout_fee AS
+CREATE MATERIALIZED VIEW spacebox.feerefunder_distribute_timeout_fee_writer TO spacebox.feerefunder_distribute_timeout_fee AS
 select
 	`timestamp`,
 	height,
