@@ -17,7 +17,7 @@ ORDER BY (height,
  denom)
 SETTINGS index_granularity = 8192;
 
-INSERT INTO spacebox.genesis_balances
+CREATE MATERIALIZED VIEW spacebox.genesis_balances_writer TO spacebox.genesis_balances AS
 WITH raw_balances AS (
 	SELECT 
 		arrayJoin(JSONExtractArrayRaw(JSONExtractString(app_state, 'bank', 'balances'))) AS raw
