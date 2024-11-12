@@ -26,8 +26,8 @@ This table stores the results of network blocks as processed by the chain. It in
   - **consensus_param_updates** (`String`): Updates to consensus parameters.
   - **timestamp** (`DATETIME`): The timestamp when the block was processed.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L88)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L60)
 ---
 
 ### `raw_transaction`
@@ -47,8 +47,9 @@ This table captures detailed data about transactions on the blockchain, includin
   - **tx** (`String`): The transaction data in string format.
   - **events** (`String`): Events triggered by the transaction.
   - **signer** (`String`): The address of the signer of the transaction.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L126)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L101)
 
 ---
 
@@ -62,8 +63,8 @@ This table contains data related to the genesis block of the chain, including th
   - **consensus_params** (`String`): Parameters related to consensus algorithms and protocols.
   - **app_hash** (`String`): The hash representing the application state at genesis.
   - **app_state** (`String`): The application state data at the genesis block.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L172)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L157)
 
 ---
 
@@ -76,8 +77,8 @@ This table stores transaction event data captured from blockchain operations. It
   - `type` (String): The event type, representing different categories of blockchain events.
   - `attributes` (String): A JSON-encoded string containing additional data or metadata associated with the event.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000002_events.up.sql#L14)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000002_events.up.sql#L1)
 ---
 
 ### `wasm_txs_events`
@@ -92,8 +93,9 @@ This table captures events specifically related to WebAssembly (WASM) transactio
   - `contract_address` (String): The address of the involved smart contract.
   - `action` (String): The specific action associated with the transaction.
   - `attributes` (String): JSON-encoded attributes that provide further details.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L57)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L36)
 
 ---
 
@@ -108,8 +110,8 @@ This table stores initial balances from the genesis state of the blockchain. It 
   - `coins` (String): JSON-encoded string representing coins held.
   - `amount` (Int64): The numeric value of the coins.
   - `denom` (String): The denomination or type of coins.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000003_genesis_balances.up.sql#L20)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000003_genesis_balances.up.sql#L5)
 ---
 
 
@@ -129,8 +131,9 @@ This table stores tick update events related to DEX messages. It tracks changes 
   - **TrancheKey** (String): Liquidity tranche key.
   - **Fee** (UInt16): Fee associated with the event.
   - **Reserves** (Int256): Reserves impacting the order state.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000004_dex_message_event_tick_update.up.sql#L29)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000004_dex_message_event_tick_update.up.sql#L1)
 
 ---
 
@@ -145,8 +148,9 @@ This table stores information on credits and debits occurring on the blockchain.
   - **amount** (Int64): Amount of coins transacted.
   - **denom** (String): Denomination of the coins.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L22)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L71)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L5)
 
 ---
 
@@ -166,8 +170,9 @@ This table stores data related to swap events from WASM contracts on the blockch
   - **return_amount** (Int128): Amount returned to the initiator.
   - **sender** (String): Address initiating the swap.
   - **spread_amount** (Int128): Spread amount for the swap.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L31)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L5)
 ---
 
 
@@ -182,8 +187,8 @@ This table stores data related to votes in WASM contracts on the blockchain.
   - **proposal_id** (Int64): ID of the proposal being voted on.
   - **position** (String): Position of the voter (e.g., 'yes' or 'no').
   - **status** (String): Status of the vote.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L130)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L110)
 
 ---
 
@@ -198,8 +203,8 @@ This table stores messages processed from transactions, including their associat
   - **signer** (String): The address that signed the transaction.
   - **message** (String): The message content in raw JSON format.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L1)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000008_message.up.sql#L24)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000008_message.up.sql#L5)
 
 ---
 
@@ -214,8 +219,8 @@ This table tracks the granting of authorizations within the blockchain, capturin
   - **grantee** (String): Address receiving the authorization.
   - **authorization** (String): Type of authorization granted, extracted as JSON.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L20)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L19)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L1)
 
 ---
 
@@ -230,8 +235,8 @@ This table captures revocation events for authorizations between addresses, trac
   - **grantee** (String): Address whose authorization is being revoked.
   - **msg_type_url** (String): Type of message being revoked.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L33)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L63)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L45)
 
 ---
 
@@ -245,8 +250,8 @@ This table stores details related to interchain accounts, including registration
   - **owner** (String): Owner of the interchain account.
   - **connection_id** (String): IBC connection ID used for the account.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L46)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000010_interchaintx.up.sql#L16)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000010_interchaintx.up.sql#L1)
 
 ---
 
@@ -261,8 +266,8 @@ This table captures data related to fee grants, such as granters and grantees in
   - **grantee** (String): Address receiving the fee allowance.
   - **allowance** (String): Details of the granted allowance in raw JSON format.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L59)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000011_feegrant.up.sql#L19)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000011_feegrant.up.sql#L1)
 
 ---
 
@@ -280,8 +285,8 @@ This table records inter-blockchain communication (IBC) transfer events, capturi
   - **sender** (String): Address sending the tokens.
   - **receiver** (String): Address receiving the tokens.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L72)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L23)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L1)
 
 ---
 
@@ -299,8 +304,8 @@ This table stores data regarding acknowledgments of IBC messages.
   - **data** (String): Acknowledged data in decoded format.
   - **signer** (String): Address acknowledging the packet.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L85)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L76)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L53)
 
 ---
 
@@ -318,8 +323,8 @@ This table captures data about received IBC packets, with details about the pack
   - **data** (String): Data of the packet in decoded format.
   - **signer** (String): Address that received the packet.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L98)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L129)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L106)
 
 ---
 
@@ -331,8 +336,8 @@ This table tracks account information based on blockchain transactions.
   - **height** (Int32): Block height of the transaction affecting the account.
   - **timestamp** (DateTime): Time when the account-related transaction occurred.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_message.up.sql#L111)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000013_account.up.sql#L10)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000013_account.up.sql#L1)
 
 ---
 
@@ -345,8 +350,8 @@ This table stores information related to network liveness, specifically capturin
   - **address** (`String`): Address of the entity related to the liveness event.
   - **missed_blocks** (`Int32`): Number of blocks missed by the entity.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000014_liveness.up.sql#L14)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000014_liveness.up.sql#L1)
 
 ---
 
@@ -363,8 +368,8 @@ This table captures interchain query data, which is crucial for understanding cr
   - **owner** (`String`): The owner of the query.
   - **type** (`String`): The type of interchain query.
   - **kv_key** (`String`): The key used in key-value operations for the query.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000015_interchainqueries.up.sql#L20)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000015_interchainqueries.up.sql#L1)
 ---
 
 ### `feerefunder_lock_fees`
@@ -378,8 +383,8 @@ This table holds data related to fee-refunding operations triggered by locking f
   - **payer** (`String`): The entity responsible for payment.
   - **port_id** (`String`): The port identifier.
   - **sequence** (`Int32`): The sequence number of the transaction.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L18)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L1)
 ---
 
 ### `feerefunder_distribute_ack_fee`
@@ -393,8 +398,8 @@ This table logs data concerning the distribution of acknowledgement fees.
   - **receiver** (`String`): Receiver of the acknowledgement fee.
   - **port_id** (`String`): The port identifier.
   - **sequence** (`Int32`): The sequence number for the transaction.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L58)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L41)
 ---
 
 ### `feerefunder_distribute_timeout_fee`
@@ -408,8 +413,8 @@ This table logs the distribution of fees in the event of timeouts.
   - **receiver** (`String`): Recipient of the timeout fee.
   - **port_id** (`String`): The port identifier.
   - **sequence** (`Int32`): The transaction sequence number.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L96)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L79)
 ---
 
 ### `admin_module`
@@ -421,8 +426,8 @@ The `admin_module` table captures data related to the administration module's op
   - **txhash** (`String`): Transaction hash.
   - **type** (`String`): Type of operation or message.
   - **value** (`String`): The value associated with the transaction or operation.
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000017_admin_module.up.sql#L17)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000017_admin_module.up.sql#L1)
 ---
 
 ### `sdk_auction`
@@ -437,5 +442,21 @@ This table stores data related to auction activities conducted via the SDK aucti
   - **amount** (`Int64`): The amount of the bid.
   - **transactions** (`Array(String)`): List of associated transactions.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
-- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000018_sdk_auction.up.sql#L19)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000018_sdk_auction.up.sql#L1)
+
+---
+
+### `spacebox.dex_message_event_tick_update_of_price_movement`
+
+This table captures data regarding updates to tick-based price movements in decentralized exchange (DEX) message events. The data stored here reflects updates that are processed within the context of DEX-related transactions.
+- **Fields:**
+  - **timestamp** (`DateTime`): The time when the tick update event occurred.
+  - **height** (`Int64`): The block height corresponding to the transaction.
+  - **TokenZero** (`String`): The identifier of the first token in the trade pair.
+  - **TokenOne** (`String`): The identifier of the second token in the trade pair.
+  - **TickIndex** (`Int64`): An index representing the price level or tick.
+  - **price** (`Float64`): The price derived from the tick index using the formula `pow(1.0001, TickIndex)`.
+
+- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000007_event_tick_update_of_price_movement.up.sql#L20)
+- [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000007_event_tick_update_of_price_movement.up.sql#L1)
