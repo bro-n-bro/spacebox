@@ -7,6 +7,7 @@
 In this table, the network blocks are presented as received from gRPC. The data in this table is suitable for monitoring overall network activity as well as for building more customized queries and tables.
 
 **Fields:**
+
 - **height** (`Int64`): The block height for which these results apply.
 - **hash** (`String`): The unique hash identifier of the block.
 - **num_txs** (`Int64`): The number of transactions in the current block height.
@@ -16,6 +17,7 @@ In this table, the network blocks are presented as received from gRPC. The data 
 - **signatures** (`String`): The signatures of the rest validators. 
 
 **Code:**
+
 - [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
 - [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
 ---
