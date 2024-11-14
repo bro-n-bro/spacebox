@@ -144,17 +144,21 @@
 <h2 id="tables">Tables</h2>
 <h3 id="raw_block"><code>raw_block</code></h3>
 <p>In this table, the network blocks are presented as received from gRPC. The data in this table is suitable for monitoring overall network activity as well as for building more customized queries and tables.</p>
-<p><strong>Fields:</strong>
-- <strong>height</strong> (<code>Int64</code>): The block height for which these results apply.
-- <strong>hash</strong> (<code>String</code>): The unique hash identifier of the block.
-- <strong>num_txs</strong> (<code>Int64</code>): The number of transactions in the current block height.
-- <strong>total_gas</strong> (<code>Int64</code>): Total gas burned in the current block height.
-- <strong>proposer_address</strong> (<code>String</code>): The consensus address of the validator who proposed the current block.
-- <strong>timestamp</strong> (<code>DATETIME</code>): The timestamp when the block was processed.
-- <strong>signatures</strong> (<code>String</code>): The signatures of the rest validators. </p>
-<p><strong>Code:</strong>
-- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33">Writing source</a>
-- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17">Table definition</a></p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><strong>height</strong> (<code>Int64</code>): The block height for which these results apply.</li>
+<li><strong>hash</strong> (<code>String</code>): The unique hash identifier of the block.</li>
+<li><strong>num_txs</strong> (<code>Int64</code>): The number of transactions in the current block height.</li>
+<li><strong>total_gas</strong> (<code>Int64</code>): Total gas burned in the current block height.</li>
+<li><strong>proposer_address</strong> (<code>String</code>): The consensus address of the validator who proposed the current block.</li>
+<li><strong>timestamp</strong> (<code>DATETIME</code>): The timestamp when the block was processed.</li>
+<li><strong>signatures</strong> (<code>String</code>): The signatures of the rest validators. </li>
+</ul>
+<p><strong>Code:</strong></p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17">Table definition</a></li>
+</ul>
 <hr />
 <h3 id="raw_block_results"><code>raw_block_results</code></h3>
 <p>This table stores the results of network blocks as processed by the chain. It includes data on transactions, events at the beginning and end of blocks, updates to validators, and consensus parameter changes. It is primarily useful for monitoring network state transitions and historical block data analysis.</p>
