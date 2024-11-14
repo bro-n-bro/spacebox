@@ -3,5 +3,6 @@ nav:
   - Home: index.md
   - Getting started: setup.md
   - Monitoring: monitoring.md
+  - Neutron network: neutron.md
 theme:
   name: readthedocs
