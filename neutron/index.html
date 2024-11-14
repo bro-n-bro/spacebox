@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Neutron network - Spacebox docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Neutron network";
+        var mkdocs_page_input_path = "neutron.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Spacebox docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setup/">Getting started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../monitoring/">Monitoring</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Neutron network</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tables">Tables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#raw_block">raw_block</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#raw_block_results">raw_block_results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#raw_transaction">raw_transaction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#raw_genesis">raw_genesis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#txs_events">txs_events</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wasm_txs_events">wasm_txs_events</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#genesis_balances">genesis_balances</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dex_message_event_tick_update">dex_message_event_tick_update</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#debs_and_creds">debs_and_creds</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wasm_swaps">wasm_swaps</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wasm_votes">wasm_votes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#message">message</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#authz_msg_grant">authz_msg_grant</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#authz_msg_revoke">authz_msg_revoke</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interchain_account">interchain_account</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#feegrant_msg_allowance">feegrant_msg_allowance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ibc_msg_transfer">ibc_msg_transfer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ibc_msg_acknowledgement">ibc_msg_acknowledgement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ibc_msg_recv_packet">ibc_msg_recv_packet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#account">account</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#liveness">liveness</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interchainqueries">interchainqueries</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#feerefunder_lock_fees">feerefunder_lock_fees</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#feerefunder_distribute_ack_fee">feerefunder_distribute_ack_fee</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#feerefunder_distribute_timeout_fee">feerefunder_distribute_timeout_fee</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#admin_module">admin_module</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sdk_auction">sdk_auction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#spaceboxdex_message_event_tick_update_of_price_movement">spacebox.dex_message_event_tick_update_of_price_movement</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Spacebox docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Neutron network</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="neutron">Neutron</h1>
+<h2 id="tables">Tables</h2>
+<h3 id="raw_block"><code>raw_block</code></h3>
+<p>In this table, the network blocks are presented as received from gRPC. The data in this table is suitable for monitoring overall network activity as well as for building more customized queries and tables.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="raw_block_results"><code>raw_block_results</code></h3>
+<p>This table stores the results of network blocks as processed by the chain. It includes data on transactions, events at the beginning and end of blocks, updates to validators, and consensus parameter changes. It is primarily useful for monitoring network state transitions and historical block data analysis.</p>
+<ul>
+<li><strong>Fields:</strong></li>
+<li><strong>height</strong> (<code>Int64</code>): The block height for which these results apply.</li>
+<li><strong>txs_results</strong> (<code>String</code>): The results of the transactions included in the block, stored as a string.</li>
+<li><strong>begin_block_events</strong> (<code>String</code>): Events that occurred at the start of the block.</li>
+<li><strong>end_block_events</strong> (<code>String</code>): Events that occurred at the end of the block.</li>
+<li><strong>validator_updates</strong> (<code>String</code>): Updates to validator set during the block processing.</li>
+<li><strong>consensus_param_updates</strong> (<code>String</code>): Updates to consensus parameters.</li>
+<li>
+<p><strong>timestamp</strong> (<code>DATETIME</code>): The timestamp when the block was processed.</p>
+</li>
+<li>
+<p><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L88">Writing source</a></p>
+</li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L60">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="raw_transaction"><code>raw_transaction</code></h3>
+<p>This table captures detailed data about transactions on the blockchain, including information on gas usage, transaction status, and related events. It serves as a primary source for analyzing transaction-level data.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DATETIME</code>): The timestamp when the transaction occurred.
+  - <strong>height</strong> (<code>Int64</code>): The block height at which the transaction was included.
+  - <strong>txhash</strong> (<code>String</code>): The unique hash identifier of the transaction.
+  - <strong>codespace</strong> (<code>String</code>): The module or component that generated an error, if applicable.
+  - <strong>code</strong> (<code>Int64</code>): The status code indicating success or failure of the transaction.
+  - <strong>raw_log</strong> (<code>String</code>): The raw log output of the transaction.
+  - <strong>logs</strong> (<code>String</code>): Detailed logs of the transaction.
+  - <strong>info</strong> (<code>String</code>): Additional information about the transaction, if available.
+  - <strong>gas_wanted</strong> (<code>Int64</code>): The amount of gas requested for the transaction.
+  - <strong>gas_used</strong> (<code>Int64</code>): The actual amount of gas consumed by the transaction.
+  - <strong>tx</strong> (<code>String</code>): The transaction data in string format.
+  - <strong>events</strong> (<code>String</code>): Events triggered by the transaction.
+  - <strong>signer</strong> (<code>String</code>): The address of the signer of the transaction.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L126">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L101">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="raw_genesis"><code>raw_genesis</code></h3>
+<p>This table contains data related to the genesis block of the chain, including the initial state, chain configuration, and parameters.
+- <strong>Fields:</strong>
+  - <strong>genesis_time</strong> (<code>DATETIME</code>): The time at which the genesis block was created.
+  - <strong>chain_id</strong> (<code>String</code>): The unique identifier for the blockchain network.
+  - <strong>initial_height</strong> (<code>Int64</code>): The initial block height of the chain.
+  - <strong>consensus_params</strong> (<code>String</code>): Parameters related to consensus algorithms and protocols.
+  - <strong>app_hash</strong> (<code>String</code>): The hash representing the application state at genesis.
+  - <strong>app_state</strong> (<code>String</code>): The application state data at the genesis block.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L172">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L157">Table definition</a></p>
+<hr />
+<h3 id="txs_events"><code>txs_events</code></h3>
+<p>This table stores transaction event data captured from blockchain operations. It is structured for efficient querying and tracking of event types and their associated attributes at a particular block height.</p>
+<ul>
+<li><strong>Fields:</strong></li>
+<li><code>height</code> (Int64): The block height where the event occurred.</li>
+<li><code>type</code> (String): The event type, representing different categories of blockchain events.</li>
+<li>
+<p><code>attributes</code> (String): A JSON-encoded string containing additional data or metadata associated with the event.</p>
+</li>
+<li>
+<p><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000002_events.up.sql#L14">Writing source</a></p>
+</li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000002_events.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="wasm_txs_events"><code>wasm_txs_events</code></h3>
+<p>This table captures events specifically related to WebAssembly (WASM) transactions on the blockchain. It contains comprehensive data for tracking transaction metadata, including contract interactions.</p>
+<ul>
+<li><strong>Fields:</strong></li>
+<li><code>timestamp</code> (DateTime): The timestamp of the transaction.</li>
+<li><code>height</code> (Int64): The block height where the transaction occurred.</li>
+<li><code>txhash</code> (String): The hash of the transaction.</li>
+<li><code>signer</code> (String): The address of the transaction signer.</li>
+<li><code>contract_address</code> (String): The address of the involved smart contract.</li>
+<li><code>action</code> (String): The specific action associated with the transaction.</li>
+<li>
+<p><code>attributes</code> (String): JSON-encoded attributes that provide further details.</p>
+</li>
+<li>
+<p><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L57">Writing source</a></p>
+</li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L36">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="genesis_balances"><code>genesis_balances</code></h3>
+<p>This table stores initial balances from the genesis state of the blockchain. It tracks the distribution of coins across addresses at the initial state.</p>
+<ul>
+<li><strong>Fields:</strong></li>
+<li><code>height</code> (Int64): The block height, set to 0 for genesis data.</li>
+<li><code>type</code> (String): The type of event, representing coin distribution (<code>coin_received</code>).</li>
+<li><code>address</code> (String): The blockchain address holding the balance.</li>
+<li><code>coins</code> (String): JSON-encoded string representing coins held.</li>
+<li><code>amount</code> (Int64): The numeric value of the coins.</li>
+<li><code>denom</code> (String): The denomination or type of coins.</li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000003_genesis_balances.up.sql#L20">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000003_genesis_balances.up.sql#L5">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="dex_message_event_tick_update"><code>dex_message_event_tick_update</code></h3>
+<p>This table stores tick update events related to DEX messages. It tracks changes to orders on the DEX using characteristics such as tick index and tranche key.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): Timestamp of the event.
+  - <strong>height</strong> (Int64): Block height associated with the event.
+  - <strong>txhash</strong> (String): Transaction hash.
+  - <strong>attributes</strong> (String): Raw attributes of the event in JSON format.
+  - <strong>signer</strong> (String): Transaction signer.
+  - <strong>TokenZero</strong> (String): First token in the trading pair.
+  - <strong>TokenOne</strong> (String): Second token in the trading pair.
+  - <strong>TokenIn</strong> (String): Token involved in the trade.
+  - <strong>TickIndex</strong> (Int32): Tick index for this event.
+  - <strong>TrancheKey</strong> (String): Liquidity tranche key.
+  - <strong>Fee</strong> (UInt16): Fee associated with the event.
+  - <strong>Reserves</strong> (Int256): Reserves impacting the order state.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000004_dex_message_event_tick_update.up.sql#L29">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000004_dex_message_event_tick_update.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="debs_and_creds"><code>debs_and_creds</code></h3>
+<p>This table stores information on credits and debits occurring on the blockchain. It tracks token movements between addresses and provides insights into financial activity.
+- <strong>Fields:</strong>
+  - <strong>height</strong> (Int64): Block height associated with the movement.
+  - <strong>type</strong> (String): Event type (e.g., credit or debit).
+  - <strong>address</strong> (String): Address involved in the transaction.
+  - <strong>coins</strong> (String): Coin data as a string representation.
+  - <strong>amount</strong> (Int64): Amount of coins transacted.
+  - <strong>denom</strong> (String): Denomination of the coins.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L22">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L71">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L5">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="wasm_swaps"><code>wasm_swaps</code></h3>
+<p>This table stores data related to swap events from WASM contracts on the blockchain.
+- <strong>Fields:</strong>
+  - <strong>height</strong> (Int64): Block height associated with the swap.
+  - <strong>contract_address</strong> (String): Address of the contract executing the swap.
+  - <strong>action</strong> (String): Action type, usually 'swap'.
+  - <strong>ask_asset</strong> (String): Asset being requested.
+  - <strong>commission_amount</strong> (Int128): Commission fee associated with the swap.
+  - <strong>maker_fee_amount</strong> (Int128): Maker fee amount for the swap.
+  - <strong>offer_amount</strong> (Int128): Amount being offered in the swap.
+  - <strong>offer_asset</strong> (String): Asset being offered.
+  - <strong>receiver</strong> (String): Receiving address.
+  - <strong>return_amount</strong> (Int128): Amount returned to the initiator.
+  - <strong>sender</strong> (String): Address initiating the swap.
+  - <strong>spread_amount</strong> (Int128): Spread amount for the swap.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L31">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L5">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="wasm_votes"><code>wasm_votes</code></h3>
+<p>This table stores data related to votes in WASM contracts on the blockchain.
+- <strong>Fields:</strong>
+  - <strong>height</strong> (Int64): Block height associated with the vote.
+  - <strong>contract_address</strong> (String): Address of the contract managing the vote.
+  - <strong>action</strong> (String): Action type, usually 'vote'.
+  - <strong>sender</strong> (String): Address of the voter.
+  - <strong>proposal_id</strong> (Int64): ID of the proposal being voted on.
+  - <strong>position</strong> (String): Position of the voter (e.g., 'yes' or 'no').
+  - <strong>status</strong> (String): Status of the vote.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L130">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000006_wasm.up.sql#L110">Table definition</a></p>
+<hr />
+<h3 id="message"><code>message</code></h3>
+<p>This table stores messages processed from transactions, including their associated metadata. It allows for monitoring and querying message-level details such as type, signer, and content.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): Timestamp when the message was processed.
+  - <strong>height</strong> (Int64): The block height associated with the message.
+  - <strong>txhash</strong> (String): Hash of the transaction containing the message.
+  - <strong>type</strong> (String): The type of the message (e.g., <code>MsgSend</code>, <code>MsgGrant</code>).
+  - <strong>signer</strong> (String): The address that signed the transaction.
+  - <strong>message</strong> (String): The message content in raw JSON format.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000008_message.up.sql#L24">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000008_message.up.sql#L5">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="authz_msg_grant"><code>authz_msg_grant</code></h3>
+<p>This table tracks the granting of authorizations within the blockchain, capturing data related to the granter, grantee, and type of authorization.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): The time when the grant was recorded.
+  - <strong>height</strong> (Int64): Block height associated with the grant.
+  - <strong>txhash</strong> (String): Transaction hash that contains the grant event.
+  - <strong>granter</strong> (String): Address granting the authorization.
+  - <strong>grantee</strong> (String): Address receiving the authorization.
+  - <strong>authorization</strong> (String): Type of authorization granted, extracted as JSON.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L19">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="authz_msg_revoke"><code>authz_msg_revoke</code></h3>
+<p>This table captures revocation events for authorizations between addresses, tracking who revoked, whom they revoked, and the specific message type.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): The time the revocation was recorded.
+  - <strong>height</strong> (Int64): Block height of the revocation event.
+  - <strong>txhash</strong> (String): Transaction hash containing the revocation.
+  - <strong>granter</strong> (String): Address revoking the authorization.
+  - <strong>grantee</strong> (String): Address whose authorization is being revoked.
+  - <strong>msg_type_url</strong> (String): Type of message being revoked.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L63">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000009_authz.up.sql#L45">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="interchain_account"><code>interchain_account</code></h3>
+<p>This table stores details related to interchain accounts, including registration events and their associated metadata.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): The time of account registration.
+  - <strong>height</strong> (Int32): Block height for the event.
+  - <strong>txhash</strong> (String): Hash of the transaction containing the event.
+  - <strong>owner</strong> (String): Owner of the interchain account.
+  - <strong>connection_id</strong> (String): IBC connection ID used for the account.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000010_interchaintx.up.sql#L16">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000010_interchaintx.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="feegrant_msg_allowance"><code>feegrant_msg_allowance</code></h3>
+<p>This table captures data related to fee grants, such as granters and grantees involved in fee allowance events.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): The time the fee allowance event was recorded.
+  - <strong>height</strong> (Int64): The block height at which the event took place.
+  - <strong>txhash</strong> (String): Transaction hash of the event.
+  - <strong>granter</strong> (String): Address granting the allowance.
+  - <strong>grantee</strong> (String): Address receiving the fee allowance.
+  - <strong>allowance</strong> (String): Details of the granted allowance in raw JSON format.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000011_feegrant.up.sql#L19">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000011_feegrant.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="ibc_msg_transfer"><code>ibc_msg_transfer</code></h3>
+<p>This table records inter-blockchain communication (IBC) transfer events, capturing details about the sender, receiver, amount, and other transfer parameters.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): Time when the IBC transfer occurred.
+  - <strong>height</strong> (Int64): Block height of the transfer.
+  - <strong>txhash</strong> (String): Transaction hash containing the transfer.
+  - <strong>source_port</strong> (String): Source port involved in the transfer.
+  - <strong>source_channel</strong> (String): Source channel involved in the transfer.
+  - <strong>denom</strong> (String): Denomination of the transferred token.
+  - <strong>amount</strong> (Int64): Amount of tokens transferred.
+  - <strong>sender</strong> (String): Address sending the tokens.
+  - <strong>receiver</strong> (String): Address receiving the tokens.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L23">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="ibc_msg_acknowledgement"><code>ibc_msg_acknowledgement</code></h3>
+<p>This table stores data regarding acknowledgments of IBC messages.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): The time the acknowledgment was recorded.
+  - <strong>height</strong> (Int64): Block height of the acknowledgment.
+  - <strong>txhash</strong> (String): Transaction hash containing the acknowledgment.
+  - <strong>source_port</strong> (String): Source port of the packet being acknowledged.
+  - <strong>source_channel</strong> (String): Source channel of the packet.
+  - <strong>destination_port</strong> (String): Destination port of the packet.
+  - <strong>destination_channel</strong> (String): Destination channel of the packet.
+  - <strong>data</strong> (String): Acknowledged data in decoded format.
+  - <strong>signer</strong> (String): Address acknowledging the packet.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L76">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L53">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="ibc_msg_recv_packet"><code>ibc_msg_recv_packet</code></h3>
+<p>This table captures data about received IBC packets, with details about the packet transfer and signers.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (DateTime): The time when the packet was received.
+  - <strong>height</strong> (Int64): Block height for the packet reception.
+  - <strong>txhash</strong> (String): Hash of the transaction containing the packet reception.
+  - <strong>source_port</strong> (String): Source port of the packet.
+  - <strong>source_channel</strong> (String): Source channel of the packet.
+  - <strong>destination_port</strong> (String): Destination port of the packet.
+  - <strong>destination_channel</strong> (String): Destination channel of the packet.
+  - <strong>data</strong> (String): Data of the packet in decoded format.
+  - <strong>signer</strong> (String): Address that received the packet.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L129">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000012_ibc.up.sql#L106">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="account"><code>account</code></h3>
+<p>This table tracks account information based on blockchain transactions.
+- <strong>Fields:</strong>
+  - <strong>address</strong> (String): Address of the account.
+  - <strong>height</strong> (Int32): Block height of the transaction affecting the account.
+  - <strong>timestamp</strong> (DateTime): Time when the account-related transaction occurred.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000013_account.up.sql#L10">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000013_account.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="liveness"><code>liveness</code></h3>
+<p>This table stores information related to network liveness, specifically capturing data on missed blocks. It is primarily used for monitoring validator activity, helping to identify liveness issues in the network.
+- <strong>Fields:</strong>
+  - <strong>height</strong> (<code>Int32</code>): Block height at which the event occurred.
+  - <strong>timestamp</strong> (<code>DateTime</code>): The timestamp when the event was recorded.
+  - <strong>address</strong> (<code>String</code>): Address of the entity related to the liveness event.
+  - <strong>missed_blocks</strong> (<code>Int32</code>): Number of blocks missed by the entity.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000014_liveness.up.sql#L14">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000014_liveness.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="interchainqueries"><code>interchainqueries</code></h3>
+<p>This table captures interchain query data, which is crucial for understanding cross-chain interactions and querying logic across connected networks.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): The timestamp when the transaction was processed.
+  - <strong>height</strong> (<code>Int32</code>): The block height of the transaction.
+  - <strong>txhash</strong> (<code>String</code>): Transaction hash.
+  - <strong>action</strong> (<code>String</code>): The action performed by the query.
+  - <strong>query_id</strong> (<code>Int32</code>): Unique identifier for the query.
+  - <strong>connection_id</strong> (<code>String</code>): The ID of the connection used.
+  - <strong>owner</strong> (<code>String</code>): The owner of the query.
+  - <strong>type</strong> (<code>String</code>): The type of interchain query.
+  - <strong>kv_key</strong> (<code>String</code>): The key used in key-value operations for the query.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000015_interchainqueries.up.sql#L20">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000015_interchainqueries.up.sql#L1">Table definition</a></p>
+<hr />
+<h3 id="feerefunder_lock_fees"><code>feerefunder_lock_fees</code></h3>
+<p>This table holds data related to fee-refunding operations triggered by locking fees on the network.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): The timestamp of the transaction.
+  - <strong>height</strong> (<code>Int32</code>): The block height of the transaction.
+  - <strong>txhash</strong> (<code>String</code>): Transaction hash.
+  - <strong>channel_id</strong> (<code>String</code>): ID of the channel related to the fee lock.
+  - <strong>payer</strong> (<code>String</code>): The entity responsible for payment.
+  - <strong>port_id</strong> (<code>String</code>): The port identifier.
+  - <strong>sequence</strong> (<code>Int32</code>): The sequence number of the transaction.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L18">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L1">Table definition</a></p>
+<hr />
+<h3 id="feerefunder_distribute_ack_fee"><code>feerefunder_distribute_ack_fee</code></h3>
+<p>This table logs data concerning the distribution of acknowledgement fees.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): The timestamp when the transaction occurred.
+  - <strong>height</strong> (<code>Int32</code>): The block height of the transaction.
+  - <strong>txhash</strong> (<code>String</code>): Transaction hash.
+  - <strong>channel_id</strong> (<code>String</code>): ID of the channel associated with the fee distribution.
+  - <strong>receiver</strong> (<code>String</code>): Receiver of the acknowledgement fee.
+  - <strong>port_id</strong> (<code>String</code>): The port identifier.
+  - <strong>sequence</strong> (<code>Int32</code>): The sequence number for the transaction.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L58">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L41">Table definition</a></p>
+<hr />
+<h3 id="feerefunder_distribute_timeout_fee"><code>feerefunder_distribute_timeout_fee</code></h3>
+<p>This table logs the distribution of fees in the event of timeouts.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): Timestamp of the transaction.
+  - <strong>height</strong> (<code>Int32</code>): The block height of the transaction.
+  - <strong>txhash</strong> (<code>String</code>): Transaction hash.
+  - <strong>channel_id</strong> (<code>String</code>): Channel ID associated with the fee distribution.
+  - <strong>receiver</strong> (<code>String</code>): Recipient of the timeout fee.
+  - <strong>port_id</strong> (<code>String</code>): The port identifier.
+  - <strong>sequence</strong> (<code>Int32</code>): The transaction sequence number.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L96">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000016_feerefunder.up.sql#L79">Table definition</a></p>
+<hr />
+<h3 id="admin_module"><code>admin_module</code></h3>
+<p>The <code>admin_module</code> table captures data related to the administration module's operations.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): The timestamp of the transaction.
+  - <strong>height</strong> (<code>Int32</code>): The block height.
+  - <strong>txhash</strong> (<code>String</code>): Transaction hash.
+  - <strong>type</strong> (<code>String</code>): Type of operation or message.
+  - <strong>value</strong> (<code>String</code>): The value associated with the transaction or operation.
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000017_admin_module.up.sql#L17">Writing source</a>
+- <a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000017_admin_module.up.sql#L1">Table definition</a></p>
+<hr />
+<h3 id="sdk_auction"><code>sdk_auction</code></h3>
+<p>This table stores data related to auction activities conducted via the SDK auction module.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): Timestamp when the auction transaction occurred.
+  - <strong>height</strong> (<code>Int32</code>): The block height of the transaction.
+  - <strong>txhash</strong> (<code>String</code>): Transaction hash.
+  - <strong>bidder</strong> (<code>String</code>): The address of the bidder.
+  - <strong>denom</strong> (<code>String</code>): The denomination of the bid amount.
+  - <strong>amount</strong> (<code>Int64</code>): The amount of the bid.
+  - <strong>transactions</strong> (<code>Array(String)</code>): List of associated transactions.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000018_sdk_auction.up.sql#L19">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000018_sdk_auction.up.sql#L1">Table definition</a></li>
+</ul>
+<hr />
+<h3 id="spaceboxdex_message_event_tick_update_of_price_movement"><code>spacebox.dex_message_event_tick_update_of_price_movement</code></h3>
+<p>This table captures data regarding updates to tick-based price movements in decentralized exchange (DEX) message events. The data stored here reflects updates that are processed within the context of DEX-related transactions.
+- <strong>Fields:</strong>
+  - <strong>timestamp</strong> (<code>DateTime</code>): The time when the tick update event occurred.
+  - <strong>height</strong> (<code>Int64</code>): The block height corresponding to the transaction.
+  - <strong>TokenZero</strong> (<code>String</code>): The identifier of the first token in the trade pair.
+  - <strong>TokenOne</strong> (<code>String</code>): The identifier of the second token in the trade pair.
+  - <strong>TickIndex</strong> (<code>Int64</code>): An index representing the price level or tick.
+  - <strong>price</strong> (<code>Float64</code>): The price derived from the tick index using the formula <code>pow(1.0001, TickIndex)</code>.</p>
+<ul>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000007_event_tick_update_of_price_movement.up.sql#L20">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000007_event_tick_update_of_price_movement.up.sql#L1">Table definition</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../monitoring/" class="btn btn-neutral float-left" title="Monitoring"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../monitoring/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
