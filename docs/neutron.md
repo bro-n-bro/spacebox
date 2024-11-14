@@ -6,10 +6,17 @@
 
 In this table, the network blocks are presented as received from gRPC. The data in this table is suitable for monitoring overall network activity as well as for building more customized queries and tables.
 
+- **Fields:**
+  - **height** (`Int64`): The block height for which these results apply.
+  - **hash** (`String`): The unique hash identifier of the block.
+  - **num_txs** (`Int64`): The number of transactions in the current block height.
+  - **total_gas** (`Int64`): Total gas burned in the current block height.
+  - **proposer_address** (`String`): The consensus address of the validator who proposed the current block.
+  - **timestamp** (`DATETIME`): The timestamp when the block was processed.
+  - **signatures** (`String`): The signatures of the rest validators. 
+
 - [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33)
 - [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17)
-
-
 ---
 
 ### `raw_block_results`
@@ -20,8 +27,7 @@ This table stores the results of network blocks as processed by the chain. It in
 - **Fields:**
   - **height** (`Int64`): The block height for which these results apply.
   - **txs_results** (`String`): The results of the transactions included in the block, stored as a string.
-  - **begin_block_events** (`String`): Events that occurred at the start of the block.
-  - **end_block_events** (`String`): Events that occurred at the end of the block.
+  - **finalize_block_events** (`String`): Events that occurred in the block.
   - **validator_updates** (`String`): Updates to validator set during the block processing.
   - **consensus_param_updates** (`String`): Updates to consensus parameters.
   - **timestamp** (`DATETIME`): The timestamp when the block was processed.
@@ -148,8 +154,8 @@ This table stores information on credits and debits occurring on the blockchain.
   - **amount** (Int64): Amount of coins transacted.
   - **denom** (String): Denomination of the coins.
 
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L22)
-- [Writing source](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L71)
+- [Writing source from txs](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L22)
+- [Writing source from finalized blocks](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L71)
 - [Table definition](https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L5)
 
 ---
@@ -447,7 +453,7 @@ This table stores data related to auction activities conducted via the SDK aucti
 
 ---
 
-### `spacebox.dex_message_event_tick_update_of_price_movement`
+### `dex_message_event_tick_update_of_price_movement`
 
 This table captures data regarding updates to tick-based price movements in decentralized exchange (DEX) message events. The data stored here reflects updates that are processed within the context of DEX-related transactions.
 - **Fields:**
