@@ -110,7 +110,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#sdk_auction">sdk_auction</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#spaceboxdex_message_event_tick_update_of_price_movement">spacebox.dex_message_event_tick_update_of_price_movement</a>
+    <li class="toctree-l3"><a class="reference internal" href="#dex_message_event_tick_update_of_price_movement">dex_message_event_tick_update_of_price_movement</a>
     </li>
         </ul>
     </li>
@@ -145,7 +145,19 @@
 <h3 id="raw_block"><code>raw_block</code></h3>
 <p>In this table, the network blocks are presented as received from gRPC. The data in this table is suitable for monitoring overall network activity as well as for building more customized queries and tables.</p>
 <ul>
-<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33">Writing source</a></li>
+<li><strong>Fields:</strong></li>
+<li><strong>height</strong> (<code>Int64</code>): The block height for which these results apply.</li>
+<li><strong>hash</strong> (<code>String</code>): The unique hash identifier of the block.</li>
+<li><strong>num_txs</strong> (<code>Int64</code>): The number of transactions in the current block height.</li>
+<li><strong>total_gas</strong> (<code>Int64</code>): Total gas burned in the current block height.</li>
+<li><strong>proposer_address</strong> (<code>String</code>): The consensus address of the validator who proposed the current block.</li>
+<li><strong>timestamp</strong> (<code>DATETIME</code>): The timestamp when the block was processed.</li>
+<li>
+<p><strong>signatures</strong> (<code>String</code>): The signatures of the rest validators. </p>
+</li>
+<li>
+<p><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L33">Writing source</a></p>
+</li>
 <li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000001_raw.up.sql#L17">Table definition</a></li>
 </ul>
 <hr />
@@ -155,8 +167,7 @@
 <li><strong>Fields:</strong></li>
 <li><strong>height</strong> (<code>Int64</code>): The block height for which these results apply.</li>
 <li><strong>txs_results</strong> (<code>String</code>): The results of the transactions included in the block, stored as a string.</li>
-<li><strong>begin_block_events</strong> (<code>String</code>): Events that occurred at the start of the block.</li>
-<li><strong>end_block_events</strong> (<code>String</code>): Events that occurred at the end of the block.</li>
+<li><strong>finalize_block_events</strong> (<code>String</code>): Events that occurred in the block.</li>
 <li><strong>validator_updates</strong> (<code>String</code>): Updates to validator set during the block processing.</li>
 <li><strong>consensus_param_updates</strong> (<code>String</code>): Updates to consensus parameters.</li>
 <li>
@@ -279,8 +290,8 @@
   - <strong>amount</strong> (Int64): Amount of coins transacted.
   - <strong>denom</strong> (String): Denomination of the coins.</p>
 <ul>
-<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L22">Writing source</a></li>
-<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L71">Writing source</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L22">Writing source from txs</a></li>
+<li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L71">Writing source from finalized blocks</a></li>
 <li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000005_debs_and_creds.up.sql#L5">Table definition</a></li>
 </ul>
 <hr />
@@ -540,7 +551,7 @@
 <li><a href="https://github.com/bro-n-bro/spacebox/blob/neutron/migrations/clickhouse/000018_sdk_auction.up.sql#L1">Table definition</a></li>
 </ul>
 <hr />
-<h3 id="spaceboxdex_message_event_tick_update_of_price_movement"><code>spacebox.dex_message_event_tick_update_of_price_movement</code></h3>
+<h3 id="dex_message_event_tick_update_of_price_movement"><code>dex_message_event_tick_update_of_price_movement</code></h3>
 <p>This table captures data regarding updates to tick-based price movements in decentralized exchange (DEX) message events. The data stored here reflects updates that are processed within the context of DEX-related transactions.
 - <strong>Fields:</strong>
   - <strong>timestamp</strong> (<code>DateTime</code>): The time when the tick update event occurred.
